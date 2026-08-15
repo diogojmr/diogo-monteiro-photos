@@ -71,15 +71,16 @@
 
   <style>
     :root {
-      --bg: #f5f5f3;
-      --surface: #ffffff;
-      --text: #181818;
-      --muted: #717171;
-      --line: #d8d8d4;
+      --bg: #0f0f0f;
+      --surface: #181818;
+      --text: #f0f0ed;
+      --muted: #a1a19b;
+      --line: rgba(255,255,255,0.1);
+      --accent: #b8bea8;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-weight: 400; letter-spacing: 0; }
+    body { background: var(--bg); color: var(--text); color-scheme: dark; font-family: 'Inter', sans-serif; font-weight: 400; letter-spacing: 0; }
     img { display: block; width: 100%; }
     a { color: inherit; }
     .project-header {
@@ -97,7 +98,7 @@
     h1 { font-size: clamp(42px, 7vw, 88px); font-weight: 300; line-height: 1; max-width: 850px; }
     .hero-subtitle { margin-top: 1rem; font-size: 15px; line-height: 1.6; color: rgba(255,255,255,0.75); }
     .intro { width: min(1180px, 100%); margin: 0 auto; padding: 5rem 2rem; display: grid; grid-template-columns: minmax(160px, 0.65fr) minmax(0, 1.8fr); gap: 4rem; }
-    .intro-label { font-size: 11px; text-transform: uppercase; color: var(--muted); }
+    .intro-label { font-size: 11px; text-transform: uppercase; color: var(--accent); }
     .intro-copy { max-width: 760px; }
     .intro-copy h2 { font-size: clamp(25px, 3vw, 38px); font-weight: 300; line-height: 1.2; margin-bottom: 1.2rem; }
     .intro-copy p { font-size: 14px; line-height: 1.85; color: var(--muted); }
@@ -106,18 +107,18 @@
     .fact strong { display: block; font-size: 12px; font-weight: 500; margin-bottom: 0.35rem; }
     .fact span { font-size: 12px; color: var(--muted); }
     .gallery { padding: 0 1rem 1rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 1rem; }
-    .gallery figure { background: #dededb; overflow: hidden; }
+    .gallery figure { background: var(--surface); overflow: hidden; }
     .gallery figure:nth-child(3n) { grid-column: 1 / -1; }
     .gallery img { width: 100%; height: auto; object-fit: contain; aspect-ratio: auto; }
     .gallery figure:nth-child(3n) img { aspect-ratio: auto; }
-    .project-contact { margin-top: 4rem; background: #171717; color: #fff; }
+    .project-contact { margin-top: 4rem; background: #0a0a0a; color: #fff; border-top: 1px solid var(--line); }
     .related-projects { width: min(1180px, 100%); margin: 0 auto; padding: 3rem 2rem 0; display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
     .related-projects span { color: var(--muted); font-size: 11px; text-transform: uppercase; margin-right: 0.5rem; }
     .related-projects a { font-size: 13px; text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 3px; }
     .contact-inner { width: min(1180px, 100%); margin: 0 auto; padding: 5rem 2rem; display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; }
     .contact-inner h2 { font-size: clamp(28px, 4vw, 52px); font-weight: 300; line-height: 1.1; max-width: 650px; }
     .contact-button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 1.5rem; border: 1px solid rgba(255,255,255,0.55); border-radius: 24px; text-decoration: none; font-size: 13px; white-space: nowrap; }
-    footer { display: flex; justify-content: space-between; gap: 2rem; padding: 1.5rem 2rem; font-size: 11px; color: var(--muted); }
+    footer { display: flex; justify-content: space-between; gap: 2rem; padding: 1.5rem 2rem; background: #0a0a0a; border-top: 1px solid var(--line); font-size: 11px; color: var(--muted); }
     footer a { text-decoration: none; }
     @media (max-width: 720px) {
       .project-header { padding: 1.25rem; }
@@ -145,15 +146,15 @@
       <div class="hero-copy">
         <p class="eyebrow">Projeto · Karting · Espanha</p>
         <h1>Sodi Galicia</h1>
-        <p class="hero-subtitle">Fotografia de karting em competição por Diogo Monteiro.</p>
+        <p class="hero-subtitle">Um dia de corrida visto da pista e do paddock.</p>
       </div>
     </section>
 
     <section class="intro">
       <p class="intro-label">Sobre o projeto</p>
       <div class="intro-copy">
-        <h2>Velocidade, proximidade e momentos decisivos em pista.</h2>
-        <p>Uma seleção de imagens da Sodi Galicia, construída em torno da ação, dos pilotos e do ambiente de competição. O trabalho foi pensado para comunicar o ritmo do karting e criar conteúdo útil para equipas, participantes e organização.</p>
+        <h2>Mais do que acompanhar o resultado.</h2>
+        <p>Esta seleção junta a velocidade em pista aos momentos de preparação e às reações dos pilotos. A ideia foi contar a competição como ela foi vivida, com imagens úteis para participantes, equipas e organização.</p>
         <div class="project-facts">
           <p class="fact"><strong>Modalidade</strong><span>Karting</span></p>
           <p class="fact"><strong>Cobertura</strong><span>Espanha</span></p>
@@ -181,8 +182,8 @@
 
     <section class="project-contact">
       <div class="contact-inner">
-        <h2>Precisa de cobertura fotográfica para uma prova ou equipa?</h2>
-        <a class="contact-button" href="index.html?origem=projeto-sodi-galicia#contact-section" data-contact-intent="project">Enviar mensagem</a>
+        <h2>Tem uma prova ou equipa para fotografar?</h2>
+        <a class="contact-button" href="index.html?origem=projeto-sodi-galicia#contact-section" data-contact-intent="project">Falar sobre a cobertura</a>
       </div>
     </section>
   </main>
