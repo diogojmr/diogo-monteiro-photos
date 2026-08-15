@@ -222,7 +222,14 @@
     .hero-name em { font-style: italic; }
     .hero-title-extra { display: block; margin-top: 0.9rem; font-size: clamp(13px, 1.3vw, 18px); font-weight: 400; letter-spacing: 0; line-height: 1.4; color: rgba(255,255,255,0.72); }
     .hero-right { display: flex; flex-direction: column; align-items: flex-end; }
-    .hero-tagline { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.7; text-align: right; max-width: 220px; }
+    .hero-scroll-btn {
+      font-size: 15px; font-family: 'Inter', sans-serif; color: #ffffff;
+      background: rgba(255,255,255,0.12); border: 0.5px solid rgba(255,255,255,0.4);
+      border-radius: 30px; padding: 14px 32px; cursor: pointer; transition: all 0.25s;
+      display: inline-flex; align-items: center; justify-content: center; text-decoration: none;
+      letter-spacing: 0.03em; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    }
+    .hero-scroll-btn:hover { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.8); }
 
     /* ── PAGE LAYOUT ── */
     .page-content { max-width: 1600px; margin: 0 auto; padding: 0 2.5rem; }
@@ -392,7 +399,6 @@
       .hero-bg { background-position: center center; }
       .hero-bottom { flex-direction: column; align-items: flex-start; }
       .hero-right { align-items: flex-start; }
-      .hero-tagline { text-align: left; }
       .two-col-section { grid-template-columns: 1fr; gap: 2.5rem; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .footer-grid > div:first-child { grid-column: span 2; }
@@ -445,7 +451,7 @@
   <div class="hero-bottom">
     <h1 class="hero-name">Diogo<br><em>Monteiro</em><span class="hero-title-extra">Fotografia de desporto e eventos</span></h1>
     <div class="hero-right">
-      <p class="hero-tagline">Jogos, provas, equipas e eventos em Portugal e Espanha.</p>
+      <button class="hero-scroll-btn" data-contact-intent="hero" onclick="scrollToSection('contact-section')">Pedir orçamento</button>
     </div>
   </div>
 </div>
