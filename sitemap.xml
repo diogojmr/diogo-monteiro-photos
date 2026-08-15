@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.diogomonteirophotos.pt/</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto/f_auto/w_1800/v1781742452/2h-318_wvf6hv.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.diogomonteirophotos.pt/fotografo-karting-portugal.html</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://www.diogomonteirophotos.pt/fotografo-karting-portugal.html" />
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.diogomonteirophotos.pt/fotografo-karting-espana.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.diogomonteirophotos.pt/fotografo-karting-portugal.html" />
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto/f_auto/w_1600/v1781742455/redline-481_ico7ru.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.diogomonteirophotos.pt/fotografo-karting-espana.html</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.diogomonteirophotos.pt/fotografo-karting-espana.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://www.diogomonteirophotos.pt/fotografo-karting-portugal.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.diogomonteirophotos.pt/fotografo-karting-portugal.html" />
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto/f_auto/w_1600/v1781451831/sodigalicia-318_dxatks.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.diogomonteirophotos.pt/fotografia-hoquei-patins.html</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto/f_auto/w_1600/v1781263968/juventude-192_irdyb8.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.diogomonteirophotos.pt/fotografo-eventos-desportivos.html</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto/f_auto/w_1600/v1781742452/2h-318_wvf6hv.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.diogomonteirophotos.pt/projeto-sodi-galicia.html</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto/f_auto/w_1600/v1781451831/sodigalicia-318_dxatks.jpg</image:loc>
+    </image:image>
+  </url>
+</urlset>
