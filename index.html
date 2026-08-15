@@ -984,9 +984,6 @@
 
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
-    contactForm.addEventListener('focusin', () => {
-      trackAnalyticsEvent('form_start', { form_name: 'contact_request' });
-    }, { once: true });
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = contactForm.querySelector('.form-submit');

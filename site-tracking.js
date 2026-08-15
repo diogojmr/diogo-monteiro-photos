@@ -32,12 +32,6 @@ document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
 });
 
 document.querySelectorAll('[data-lead-form]').forEach(form => {
-  form.addEventListener('focusin', () => {
-    if (typeof window.gtag === 'function') {
-      window.gtag('event', 'form_start', { form_name: form.dataset.leadSource || 'service_request' });
-    }
-  }, { once: true });
-
   form.addEventListener('submit', async event => {
     event.preventDefault();
     const button = form.querySelector('.lead-submit');
