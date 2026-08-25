@@ -11,12 +11,14 @@
   <meta name="theme-color" content="#111111" />
   <link rel="canonical" href="https://www.diogomonteirophotos.pt/" />
   <link rel="alternate" hreflang="pt-PT" href="https://www.diogomonteirophotos.pt/" />
+  <link rel="alternate" hreflang="es-ES" href="https://www.diogomonteirophotos.pt/es.html" />
+  <link rel="alternate" hreflang="x-default" href="https://www.diogomonteirophotos.pt/" />
   <meta name="google-site-verification" content="xHSsmAmY558Se5U4NgARSvM0LVs-acbreXkNIIwKZKA" />
 
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.diogomonteirophotos.pt/" />
   <meta property="og:title" content="Diogo Monteiro | Fotógrafo de Desporto" />
-  <meta property="og:description" content="Reportagens de jogos, provas e equipas em Portugal e Espanha, com atenção à ação e a tudo o que acontece à volta." />
+  <meta property="og:description" content="Reportagens de jogos, provas e equipas em Portugal e Espanha." />
   <meta property="og:image" content="https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto/f_auto/w_1800/v1781742452/2h-318_wvf6hv.jpg" />
   <meta property="og:image:alt" content="Kart em pista fotografado por Diogo Monteiro" />
   <meta property="og:locale" content="pt_PT" />
@@ -43,7 +45,7 @@
       "addressCountry": "PT"
     },
     "areaServed": ["Viana do Castelo", "Portugal", "Espanha"],
-    "knowsAbout": ["Fotografia de desporto", "Fotografia de karting", "Fotografia de motorsport", "Fotografia de hóquei em patins", "Fotografia de futebol", "Fotografia de voleibol", "Fotografia de basquetebol", "Fotografia de eventos"],
+    "knowsAbout": ["Fotografia de desporto", "Fotografia de karting", "Fotografia de motorsport", "Fotografia de hóquei em patins", "Fotografia de futebol", "Fotografia de futsal", "Fotografia de voleibol", "Fotografia de basquetebol", "Fotografia de eventos"],
     "serviceType": ["Fotografia de jogos e provas", "Fotografia de eventos desportivos", "Fotografia para clubes, atletas e equipas"],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
@@ -78,7 +80,7 @@
         "name": "Que tipo de trabalhos aceita?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Fotografo jogos, provas, treinos, torneios e outros eventos desportivos. Tenho experiência em karting, motorsport e hóquei em patins, e estou disponível para futebol, voleibol, basquetebol e outras modalidades. Procuro registar tanto a ação como os bastidores, a preparação e o ambiente."
+          "text": "Fotografo jogos, provas, treinos, torneios e outros eventos desportivos. Tenho experiência em karting, motorsport e hóquei em patins, e estou disponível para futebol, futsal, voleibol, basquetebol e outras modalidades. Procuro registar tanto a ação como os bastidores, a preparação e o ambiente."
         }
       },
       {
@@ -218,6 +220,8 @@
     .nav-overlay-footer { display: flex; gap: 1.5rem; padding-top: 2rem; }
     .nav-overlay-footer a { font-size: 12px; color: var(--text-tertiary); text-decoration: none; transition: color 0.15s; }
     .nav-overlay-footer a:hover { color: var(--text-secondary); }
+    .language-switch { margin-left: auto; display: inline-flex; align-items: center; gap: 0.45rem; font-size: 12px; color: var(--text-tertiary); }
+    .language-switch [aria-current="page"] { color: var(--text); }
 
     /* ── HERO ── */
     .hero-fullscreen {
@@ -456,6 +460,7 @@
   </div>
   <div class="nav-overlay-footer">
     <a href="https://www.instagram.com/diogomonteiro.photos/" target="_blank" rel="noopener">Instagram</a>
+    <span class="language-switch" aria-label="Idioma"><span aria-current="page">PT</span><span>/</span><a href="es.html" lang="es">ES</a></span>
   </div>
 </div>
 
@@ -471,7 +476,7 @@
   <div class="hero-overlay"></div>
   <div class="hero-top"><span class="hero-eyebrow">Fotografia de desporto · Viana do Castelo</span></div>
   <div class="hero-bottom">
-    <h1 class="hero-name">Diogo<br><em>Monteiro</em><span class="hero-title-extra">A ação e tudo o que acontece à volta.</span></h1>
+    <h1 class="hero-name">Diogo<br><em>Monteiro</em></h1>
     <div class="hero-right">
       <button class="hero-scroll-btn" data-contact-intent="hero" onclick="scrollToSection('contact-section')">Pedir orçamento</button>
     </div>
@@ -546,7 +551,7 @@
         <div class="faq-list">
           <details class="faq-item">
             <summary>Que tipo de trabalhos aceita?</summary>
-            <p>Fotografo jogos, provas, treinos, torneios e outros eventos desportivos. Tenho experiência em karting, motorsport e hóquei em patins, e estou disponível para futebol, voleibol, basquetebol e outras modalidades. Procuro registar tanto a ação como os bastidores, a preparação e o ambiente.</p>
+            <p>Fotografo jogos, provas, treinos, torneios e outros eventos desportivos. Tenho experiência em karting, motorsport e hóquei em patins, e estou disponível para futebol, futsal, voleibol, basquetebol e outras modalidades. Procuro registar tanto a ação como os bastidores, a preparação e o ambiente.</p>
           </details>
           <details class="faq-item">
             <summary>Como funciona a cobertura de um jogo, prova ou evento?</summary>
@@ -730,6 +735,7 @@
     motorsport: 'Karts',
     hoquei: 'Hóquei em Patins',
     futebol: 'Futebol',
+    futsal: 'Futsal',
     volei: 'Voleibol',
     basquetebol: 'Basquetebol',
     atletismo: 'Atletismo',
