@@ -436,6 +436,8 @@
       *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
     }
   </style>
+  <link rel="stylesheet" href="desktop-layout.css?v=20260902" />
+  <script src="desktop-navigation.js?v=20260902" defer></script>
 </head>
 <body>
 
@@ -465,7 +467,22 @@
 </div>
 
 <header class="site-header over-hero" id="site-header">
-  <span class="header-name" id="header-name" onclick="window.scrollTo({top:0,behavior:'smooth'})">Diogo Monteiro</span>
+  <a class="header-name" id="header-name" href="#hero">Diogo Monteiro</a>
+  <nav class="desktop-nav" aria-label="Navegação principal">
+    <a href="#gallery-section">Portfólio</a>
+    <details class="desktop-services">
+      <summary>Serviços</summary>
+      <div class="desktop-submenu">
+        <a href="#servicos-fotografia">Ver serviços</a>
+        <a href="fotografo-karting-portugal.html">Karting e motorsport</a>
+        <a href="fotografia-hoquei-patins.html">Hóquei em patins</a>
+        <a href="fotografo-eventos-desportivos.html">Outras modalidades e eventos</a>
+      </div>
+    </details>
+    <a href="#about-contact-section">Sobre</a>
+    <a href="#contact-section" data-contact-intent="header">Contacto</a>
+    <span class="desktop-languages" aria-label="Idioma"><span aria-current="page">PT</span><a href="es.html" lang="es" aria-label="Español">ES</a></span>
+  </nav>
   <button class="menu-btn" id="menu-btn" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-overlay">☰</button>
 </header>
 
@@ -581,11 +598,14 @@
 
 <div id="contact-section">
   <div class="page-content">
-    <div class="two-col-section">
-      <p class="section-eyebrow">Contacto</p>
-      <div>
+    <div class="two-col-section contact-layout">
+      <p class="section-eyebrow contact-eyebrow">Contacto</p>
+      <div class="contact-content">
+        <div class="contact-intro">
         <h2 class="contact-heading">Falemos do próximo<br>jogo ou evento</h2>
         <p class="contact-sub">Diga-me onde, quando e que imagens procura. Respondo normalmente em 24–48 horas.</p>
+        <div class="contact-direct"><p>Email</p><a href="mailto:geral@diogomonteirophotos.pt">geral@diogomonteirophotos.pt</a></div>
+        </div>
         <form action="https://formspree.io/f/xeewdepr" method="POST" id="contact-form">
           <input type="hidden" name="_subject" value="Nova mensagem através do site" />
           <input type="hidden" name="pagina" id="lead-page" value="Página inicial" />
@@ -594,7 +614,10 @@
           <input type="hidden" name="utm_campaign" id="lead-utm-campaign" value="" />
           <div class="visually-hidden" aria-hidden="true"><label for="website">Website</label><input type="text" id="website" name="_gotcha" tabindex="-1" autocomplete="off" /></div>
           <div class="form-field"><label for="nome">Nome</label><input type="text" id="nome" name="nome" placeholder="O seu nome" autocomplete="name" required /></div>
-          <div class="form-field"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="email@exemplo.com" autocomplete="email" inputmode="email" required /></div>
+          <div class="contact-form-row">
+            <div class="form-field"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="email@exemplo.com" autocomplete="email" inputmode="email" required /></div>
+            <div class="form-field desktop-only"><label for="contact-phone">Telemóvel (opcional)</label><input id="contact-phone" name="telemovel" type="tel" autocomplete="tel" disabled /></div>
+          </div>
           <div class="form-field"><label for="mensagem">Mensagem</label><textarea id="mensagem" name="mensagem" placeholder="Modalidade, data, local e o que tem em mente" required></textarea></div>
           <button class="form-submit" type="submit">Enviar</button>
           <p class="form-alternative">Prefere email? <a href="mailto:geral@diogomonteirophotos.pt">geral@diogomonteirophotos.pt</a></p>

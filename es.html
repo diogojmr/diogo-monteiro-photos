@@ -437,6 +437,8 @@
       *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
     }
   </style>
+  <link rel="stylesheet" href="desktop-layout.css?v=20260902" />
+  <script src="desktop-navigation.js?v=20260902" defer></script>
 </head>
 <body>
 
@@ -466,7 +468,22 @@
 </div>
 
 <header class="site-header over-hero" id="site-header">
-  <span class="header-name" id="header-name" onclick="window.scrollTo({top:0,behavior:'smooth'})">Diogo Monteiro</span>
+  <a class="header-name" id="header-name" href="#hero">Diogo Monteiro</a>
+  <nav class="desktop-nav" aria-label="Navegación principal">
+    <a href="#gallery-section">Portafolio</a>
+    <details class="desktop-services">
+      <summary>Servicios</summary>
+      <div class="desktop-submenu">
+        <a href="#servicos-fotografia">Ver servicios</a>
+        <a href="fotografo-karting-espana.html">Karting y motorsport</a>
+        <a href="fotografia-hoquei-patins.html">Hockey sobre patines</a>
+        <a href="fotografo-eventos-desportivos.html">Otras disciplinas y eventos</a>
+      </div>
+    </details>
+    <a href="#about-contact-section">Sobre mí</a>
+    <a href="#contact-section" data-contact-intent="header">Contacto</a>
+    <span class="desktop-languages" aria-label="Idioma"><a href="index.html" lang="pt-PT" aria-label="Português">PT</a><span aria-current="page">ES</span></span>
+  </nav>
   <button class="menu-btn" id="menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-overlay">☰</button>
 </header>
 
@@ -582,11 +599,14 @@
 
 <div id="contact-section">
   <div class="page-content">
-    <div class="two-col-section">
-      <p class="section-eyebrow">Contacto</p>
-      <div>
+    <div class="two-col-section contact-layout">
+      <p class="section-eyebrow contact-eyebrow">Contacto</p>
+      <div class="contact-content">
+        <div class="contact-intro">
         <h2 class="contact-heading">Hablemos del próximo<br>partido o evento</h2>
         <p class="contact-sub">Cuéntame dónde, cuándo y qué imágenes necesitas. Respondo normalmente en 24–48 horas.</p>
+        <div class="contact-direct"><p>Email</p><a href="mailto:geral@diogomonteirophotos.pt">geral@diogomonteirophotos.pt</a></div>
+        </div>
         <form action="https://formspree.io/f/xeewdepr" method="POST" id="contact-form">
           <input type="hidden" name="_subject" value="Nuevo mensaje desde la web en español" />
           <input type="hidden" name="pagina" id="lead-page" value="Página en español" />
@@ -595,7 +615,10 @@
           <input type="hidden" name="utm_campaign" id="lead-utm-campaign" value="" />
           <div class="visually-hidden" aria-hidden="true"><label for="website">Website</label><input type="text" id="website" name="_gotcha" tabindex="-1" autocomplete="off" /></div>
           <div class="form-field"><label for="nome">Nombre</label><input type="text" id="nome" name="nome" placeholder="Tu nombre" autocomplete="name" required /></div>
-          <div class="form-field"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="email@exemplo.com" autocomplete="email" inputmode="email" required /></div>
+          <div class="contact-form-row">
+            <div class="form-field"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="email@exemplo.com" autocomplete="email" inputmode="email" required /></div>
+            <div class="form-field desktop-only"><label for="contact-phone">Móvil (opcional)</label><input id="contact-phone" name="telemovel" type="tel" autocomplete="tel" disabled /></div>
+          </div>
           <div class="form-field"><label for="mensagem">Mensaje</label><textarea id="mensagem" name="mensagem" placeholder="Disciplina, fecha, lugar y lo que tienes en mente" required></textarea></div>
           <button class="form-submit" type="submit">Enviar</button>
           <p class="form-alternative">¿Prefieres el correo electrónico? <a href="mailto:geral@diogomonteirophotos.pt">geral@diogomonteirophotos.pt</a></p>

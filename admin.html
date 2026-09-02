@@ -161,11 +161,6 @@
               <option value="outros">Outra modalidade</option>
             </select>
           </div>
-          <div class="field">
-            <label for="alt">Descrição da fotografia</label>
-            <textarea id="alt" maxlength="180" required placeholder="Ex.: Jogador a rematar durante um jogo de futebol em Viana do Castelo"></textarea>
-            <div class="help">Descreva o momento, a modalidade e, quando fizer sentido, o local.</div>
-          </div>
           <button class="btn" id="publish-btn" type="submit">Publicar fotografia</button>
           <div class="status" id="publish-status" role="status"></div>
         </form>
@@ -302,6 +297,20 @@
       return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 48) || 'fotografia';
     }
 
+    function automaticDescription(category) {
+      const descriptions = {
+        futebol: 'Fotografia de futebol por Diogo Monteiro',
+        futsal: 'Fotografia de futsal por Diogo Monteiro',
+        volei: 'Fotografia de voleibol por Diogo Monteiro',
+        basquetebol: 'Fotografia de basquetebol por Diogo Monteiro',
+        hoquei: 'Fotografia de hóquei em patins por Diogo Monteiro',
+        motorsport: 'Fotografia de karting e automobilismo por Diogo Monteiro',
+        atletismo: 'Fotografia de atletismo por Diogo Monteiro',
+        outros: 'Fotografia de desporto por Diogo Monteiro'
+      };
+      return descriptions[category] || 'Fotografia de desporto por Diogo Monteiro';
+    }
+
     async function uploadImage(file, category, description) {
       setStatus(publishStatus, 'A preparar a fotografia...');
       const optimized = await optimizeImage(file);
@@ -335,8 +344,7 @@
         <article class="photo-item">
           <img src="${escapeHtml(photo.src || photo.url)}" alt="" loading="lazy">
           <div>
-            <div class="photo-title">${escapeHtml(photo.alt || 'Fotografia de desporto')}</div>
-            <div class="photo-meta">${escapeHtml(photo.label || labels[photo.category] || 'Desporto')}</div>
+            <div class="photo-title">${escapeHtml(photo.label || labels[photo.category] || 'Desporto')}</div>
           </div>
           <div class="photo-actions">
             <button class="btn secondary small" type="button" data-action="up" data-index="${index}" aria-label="Mover para cima" ${index === 0 ? 'disabled' : ''}>↑</button>
@@ -373,7 +381,7 @@
       const file = document.getElementById('photo-file').files[0];
       const url = document.getElementById('photo-url').value.trim();
       const category = document.getElementById('category').value;
-      const alt = document.getElementById('alt').value.trim();
+      const alt = automaticDescription(category);
       if (!file && !url) return setStatus(publishStatus, 'Escolha um ficheiro ou indique uma ligação.', 'error');
       button.disabled = true;
       try {

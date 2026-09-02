@@ -57,14 +57,31 @@
   <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="service-pages.css?v=20260815-3" />
+  <link rel="stylesheet" href="desktop-layout.css?v=20260902" />
+  <script src="desktop-navigation.js?v=20260902" defer></script>
 </head>
 <body data-page-type="karting_service_es">
-  <header class="service-header">
+<header class="service-header">
     <a class="brand" href="index.html">Diogo Monteiro</a>
     <nav class="header-links" aria-label="Navegación principal">
       <a href="index.html#gallery-section">Porfolio</a>
       <a href="#pedido-orcamento" data-contact-intent="header">Contacto</a>
     </nav>
+  <nav class="desktop-nav" aria-label="Navegación principal">
+    <a href="es.html#gallery-section">Portafolio</a>
+    <details class="desktop-services">
+      <summary>Servicios</summary>
+      <div class="desktop-submenu">
+        <a href="es.html#servicos-fotografia">Ver servicios</a>
+        <a href="fotografo-karting-espana.html">Karting y motorsport</a>
+        <a href="fotografia-hoquei-patins.html">Hockey sobre patines</a>
+        <a href="fotografo-eventos-desportivos.html">Otras disciplinas y eventos</a>
+      </div>
+    </details>
+    <a href="es.html#about-contact-section">Sobre mí</a>
+    <a href="#pedido-orcamento" data-contact-intent="header">Contacto</a>
+    <span class="desktop-languages" aria-label="Idioma"><a href="fotografo-karting-portugal.html" lang="pt-PT" aria-label="Português">PT</a><span aria-current="page">ES</span></span>
+  </nav>
   </header>
   <main>
     <section class="service-hero">
@@ -111,14 +128,20 @@
       <a href="fotografo-eventos-desportivos.html">Eventos deportivos</a>
       <a href="fotografo-karting-portugal.html" lang="pt">Versão em português</a>
     </nav>
-    <section class="service-contact" id="pedido-orcamento">
+<section class="service-contact" id="pedido-orcamento">
       <div class="contact-inner">
+        <div class="contact-intro">
         <h2>¿Tienes una carrera en mente? Cuéntame los detalles.</h2>
+        <div class="contact-direct"><p>Email</p><a href="mailto:geral@diogomonteirophotos.pt">geral@diogomonteirophotos.pt</a></div>
+        </div>
         <form class="lead-form" action="https://formspree.io/f/xeewdepr" method="POST" data-lead-form data-lead-source="karting_service_es" data-sending-label="Enviando..." data-sent-label="Enviado">
           <input type="hidden" name="_subject" value="Nueva solicitud: fotografía de karting en España" /><input type="hidden" name="origem" value="Página de karting España" />
           <div class="visually-hidden" aria-hidden="true"><label for="lead-website">Sitio web</label><input id="lead-website" name="_gotcha" tabindex="-1" autocomplete="off" /></div>
           <div class="lead-field"><label for="lead-name">Nombre</label><input id="lead-name" name="nome" autocomplete="name" required /></div>
-          <div class="lead-field"><label for="lead-email">Email</label><input id="lead-email" name="email" type="email" autocomplete="email" inputmode="email" required /></div>
+          <div class="contact-form-row">
+            <div class="lead-field"><label for="lead-email">Email</label><input id="lead-email" name="email" type="email" autocomplete="email" inputmode="email" required /></div>
+            <div class="lead-field desktop-only"><label for="contact-phone">Móvil (opcional)</label><input id="contact-phone" name="telemovel" type="tel" autocomplete="tel" disabled /></div>
+          </div>
           <div class="lead-field"><label for="lead-message">Mensaje</label><textarea id="lead-message" name="mensagem" placeholder="Fecha, circuito y tipo de cobertura..." required></textarea></div>
           <button class="lead-submit" type="submit">Enviar mensaje</button>
           <p class="lead-status" data-form-success role="status" aria-live="polite">Mensaje enviado. Responderé pronto.</p><p class="lead-status" data-form-error role="alert">No se ha podido enviar. Inténtalo de nuevo más tarde.</p>
