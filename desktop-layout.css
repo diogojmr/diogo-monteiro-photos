@@ -7,7 +7,7 @@
 .nav-overlay:not(.open) { visibility: hidden; }
 .header-name { text-decoration: none; }
 
-@media (min-width: 1024px) {
+@media (min-width: 960px) {
   .site-header,
   .site-header.over-hero,
   .site-header.over-content,

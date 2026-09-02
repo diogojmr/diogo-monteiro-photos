@@ -1,5 +1,5 @@
 (() => {
-  const desktop = window.matchMedia('(min-width: 1024px)');
+  const desktop = window.matchMedia('(min-width: 960px)');
   const services = document.querySelector('.desktop-services');
   const phone = document.querySelector('[name="telemovel"]');
 
