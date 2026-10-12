@@ -247,10 +247,19 @@
       dataSha = file.sha;
       portfolio = JSON.parse(decodeUtf8(file.content));
       if (!Array.isArray(portfolio.photos)) portfolio.photos = [];
+      if (!Array.isArray(portfolio.galleryOrder)) {
+        portfolio.galleryOrder = portfolio.photos.map(photo => photo.src || photo.url);
+      }
       renderList();
     }
 
     async function savePortfolio(message) {
+      const uploadedSources = portfolio.photos.map(photo => photo.src || photo.url);
+      const uploadedSet = new Set(uploadedSources);
+      let nextPhoto = 0;
+      portfolio.galleryOrder = portfolio.galleryOrder.map(src =>
+        uploadedSet.has(src) ? uploadedSources[nextPhoto++] : src);
+      portfolio.galleryOrder.push(...uploadedSources.slice(nextPhoto));
       const result = await github(DATA_PATH, {
         method: 'PUT',
         body: JSON.stringify({
@@ -386,8 +395,11 @@
       button.disabled = true;
       try {
         const src = file ? await uploadImage(file, category, alt) : url;
-        const position = Math.floor(Math.random() * (portfolio.photos.length + 1));
-        portfolio.photos.splice(position, 0, { src, category, label: labels[category], alt });
+        const position = Math.floor(Math.random() * (portfolio.galleryOrder.length + 1));
+        const uploadedSources = new Set(portfolio.photos.map(photo => photo.src || photo.url));
+        const photoPosition = portfolio.galleryOrder.slice(0, position).filter(source => uploadedSources.has(source)).length;
+        portfolio.galleryOrder.splice(position, 0, src);
+        portfolio.photos.splice(photoPosition, 0, { src, category, label: labels[category], alt });
         setStatus(publishStatus, 'A atualizar o site...');
         await savePortfolio(`Atualizar portfólio: ${alt.slice(0, 60)}`);
         event.target.reset();
@@ -410,7 +422,10 @@
       document.querySelectorAll('.photo-actions button').forEach(item => { item.disabled = true; });
       const previous = JSON.stringify(portfolio);
       try {
-        if (action === 'delete') portfolio.photos.splice(index, 1);
+        if (action === 'delete') {
+          const [removed] = portfolio.photos.splice(index, 1);
+          portfolio.galleryOrder = portfolio.galleryOrder.filter(src => src !== (removed.src || removed.url));
+        }
         if (action === 'up' && index > 0) [portfolio.photos[index - 1], portfolio.photos[index]] = [portfolio.photos[index], portfolio.photos[index - 1]];
         if (action === 'down' && index < portfolio.photos.length - 1) [portfolio.photos[index + 1], portfolio.photos[index]] = [portfolio.photos[index], portfolio.photos[index + 1]];
         await savePortfolio(action === 'delete' ? 'Remover fotografia do portfólio' : 'Reordenar portfólio');

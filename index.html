@@ -508,6 +508,11 @@
           <button class="filter-btn active" type="button" data-filter="todos">Todos</button>
           <button class="filter-btn" type="button" data-filter="motorsport">Karts</button>
           <button class="filter-btn" type="button" data-filter="hoquei">Hóquei em Patins</button>
+          <button class="filter-btn" type="button" data-filter="futebol" hidden>Futebol</button>
+          <button class="filter-btn" type="button" data-filter="futsal" hidden>Futsal</button>
+          <button class="filter-btn" type="button" data-filter="volei" hidden>Voleibol</button>
+          <button class="filter-btn" type="button" data-filter="basquetebol" hidden>Basquetebol</button>
+          <button class="filter-btn" type="button" data-filter="atletismo" hidden>Atletismo</button>
           <button class="filter-btn" type="button" data-filter="outros" hidden>Outras modalidades</button>
         </div>
       </div>
@@ -765,10 +770,19 @@
   };
 
   function updateGalleryFilters() {
-    const otherButton = document.querySelector('[data-filter="outros"]');
-    const hasOtherSports = allPhotos.some(photo => !['motorsport', 'hoquei'].includes(photo.cat));
-    otherButton.hidden = !hasOtherSports;
-    if (!hasOtherSports && currentFilter === 'outros') currentFilter = 'todos';
+    const categories = new Set(allPhotos.map(photo => photo.cat));
+    if (currentFilter !== 'todos' && !categories.has(currentFilter)) currentFilter = 'todos';
+    document.querySelectorAll('.filter-btn').forEach(button => {
+      button.hidden = button.dataset.filter !== 'todos' && !categories.has(button.dataset.filter);
+      button.classList.toggle('active', button.dataset.filter === currentFilter);
+    });
+  }
+
+  function applyGalleryOrder(photos, order) {
+    if (!Array.isArray(order)) return photos;
+    const positions = new Map(order.map((src, index) => [src, index]));
+    return [...photos].sort((a, b) =>
+      (positions.get(a.src) ?? order.length) - (positions.get(b.src) ?? order.length));
   }
 
   // As novas fotografias são guardadas com o site no GitHub Pages.
@@ -788,7 +802,8 @@
         };
       }).filter(photo => photo.src);
       const existingSources = new Set(staticPhotos.map(photo => photo.src));
-      allPhotos = [...extraPhotos.filter(photo => !existingSources.has(photo.src)), ...staticPhotos];
+      const combinedPhotos = [...extraPhotos.filter(photo => !existingSources.has(photo.src)), ...staticPhotos];
+      allPhotos = applyGalleryOrder(combinedPhotos, payload.galleryOrder);
     } catch (error) {
       allPhotos = [...staticPhotos];
     }
@@ -817,9 +832,6 @@
 
   function getFiltered() {
     if (currentFilter === 'todos') return allPhotos;
-    if (currentFilter === 'outros') {
-      return allPhotos.filter(photo => !['motorsport', 'hoquei'].includes(photo.cat));
-    }
     return allPhotos.filter(photo => photo.cat === currentFilter);
   }
 
