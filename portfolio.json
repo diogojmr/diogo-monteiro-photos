@@ -2,6 +2,12 @@
   "version": 1,
   "photos": [
     {
+      "src": "media/portfolio/1791799993334-futsal-fotografia-de-futsal-por-diogo-monteiro.jpg",
+      "category": "futsal",
+      "label": "Futsal",
+      "alt": "Fotografia de futsal por Diogo Monteiro"
+    },
+    {
       "src": "media/portfolio/1791799950090-futsal-fotografia-de-futsal-por-diogo-monteiro.jpg",
       "category": "futsal",
       "label": "Futsal",
