@@ -1,4 +1,11 @@
 {
   "version": 1,
-  "photos": []
+  "photos": [
+    {
+      "src": "media/portfolio/1791799596980-hoquei-fotografia-de-hoquei-em-patins-por-diogo-monteir.jpg",
+      "category": "hoquei",
+      "label": "Hóquei em Patins",
+      "alt": "Fotografia de hóquei em patins por Diogo Monteiro"
+    }
+  ]
 }
