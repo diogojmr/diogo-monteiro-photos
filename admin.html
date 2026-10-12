@@ -386,7 +386,8 @@
       button.disabled = true;
       try {
         const src = file ? await uploadImage(file, category, alt) : url;
-        portfolio.photos.unshift({ src, category, label: labels[category], alt });
+        const position = Math.floor(Math.random() * (portfolio.photos.length + 1));
+        portfolio.photos.splice(position, 0, { src, category, label: labels[category], alt });
         setStatus(publishStatus, 'A atualizar o site...');
         await savePortfolio(`Atualizar portfólio: ${alt.slice(0, 60)}`);
         event.target.reset();
