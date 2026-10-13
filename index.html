@@ -289,7 +289,7 @@
       border: 0; padding: 0; background: transparent; text-align: left;
     }
     .photo-card:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
-    .photo-card img { width: 100%; height: 100%; display: block; transition: transform 0.4s ease; }
+    .photo-card img { width: 100%; height: 100%; object-fit: contain; display: block; transition: transform 0.4s ease; }
     .photo-card:hover img { transform: scale(1.03); }
     .photo-overlay {
       position: absolute; inset: 0; background: rgba(0,0,0,0);
@@ -319,7 +319,8 @@
       display: flex; align-items: center; justify-content: center;
       opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
     }
-    .lightbox.open { opacity: 1; pointer-events: all; }
+    .lightbox:not(.open) { visibility: hidden; }
+    .lightbox.open { opacity: 1; pointer-events: all; visibility: visible; }
     .lightbox-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
     .lightbox-img { position: relative; z-index: 1; max-width: 88vw; max-height: 88vh; width: auto; height: auto; border-radius: var(--radius-lg); transform: scale(0.96); transition: transform 0.3s ease; }
     .lightbox.open .lightbox-img { transform: scale(1); }
@@ -699,11 +700,13 @@
     document.getElementById('nav-overlay').classList.add('open');
     document.getElementById('menu-btn').setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
+    document.getElementById('nav-close-btn').focus();
   });
   document.getElementById('nav-close-btn').addEventListener('click', () => {
     document.getElementById('nav-overlay').classList.remove('open');
     document.getElementById('menu-btn').setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
+    document.getElementById('menu-btn').focus();
   });
 
   // Portfólio principal: fica sempre disponível, mesmo que um serviço externo falhe.
@@ -817,6 +820,7 @@
   }
 
   const imageRatioCache = new Map();
+  const imageRatioPending = new Map();
   let renderToken = 0;
   let currentRowsPerPage = getRowsPerPage();
   let currentFilter = 'todos';
@@ -845,18 +849,30 @@
 
   function getImageRatio(photo) {
     if (imageRatioCache.has(photo.src)) return Promise.resolve(imageRatioCache.get(photo.src));
-    return new Promise(resolve => {
+    if (imageRatioPending.has(photo.src)) return imageRatioPending.get(photo.src);
+    const pending = new Promise(resolve => {
       const img = new Image();
-      img.decoding = 'async';
-      img.fetchPriority = 'low';
-      img.onload = () => {
-        const ratio = img.naturalHeight && img.naturalWidth ? img.naturalWidth / img.naturalHeight : 4 / 3;
+      let settled = false;
+      const finish = ratio => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timeout);
+        img.onload = null;
+        img.onerror = null;
         imageRatioCache.set(photo.src, ratio);
+        imageRatioPending.delete(photo.src);
         resolve(ratio);
       };
-      img.onerror = () => resolve(4 / 3);
+      // A slow external image must not hold the entire gallery indefinitely.
+      const timeout = setTimeout(() => finish(4 / 3), 5000);
+      img.decoding = 'async';
+      img.fetchPriority = 'low';
+      img.onload = () => finish(img.naturalHeight && img.naturalWidth ? img.naturalWidth / img.naturalHeight : 4 / 3);
+      img.onerror = () => finish(4 / 3);
       img.src = cloudinaryVariant(photo.src, 64, 'auto:low');
     });
+    imageRatioPending.set(photo.src, pending);
+    return pending;
   }
 
   function buildJustifiedRows(photos, ratios, containerWidth) {
@@ -1143,11 +1159,27 @@
   document.getElementById('lightbox-prev').addEventListener('click', (e) => { e.stopPropagation(); lightboxPrev(); });
   document.getElementById('lightbox-next').addEventListener('click', (e) => { e.stopPropagation(); lightboxNext(); });
   document.addEventListener('keydown', e => {
+    const nav = document.getElementById('nav-overlay');
+    const activeDialog = lightbox.classList.contains('open') ? lightbox : nav.classList.contains('open') ? nav : null;
+    if (e.key === 'Tab' && activeDialog) {
+      const controls = [...activeDialog.querySelectorAll('a[href], button:not([disabled])')];
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (e.shiftKey && (document.activeElement === first || !activeDialog.contains(document.activeElement))) {
+        e.preventDefault();
+        last?.focus();
+      } else if (!e.shiftKey && (document.activeElement === last || !activeDialog.contains(document.activeElement))) {
+        e.preventDefault();
+        first?.focus();
+      }
+    }
     if (e.key === 'Escape') {
+      const menuWasOpen = nav.classList.contains('open');
       closeLightbox();
       document.getElementById('nav-overlay').classList.remove('open');
       document.getElementById('menu-btn').setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
+      if (menuWasOpen) document.getElementById('menu-btn').focus();
     }
     if (lightbox.classList.contains('open') && e.key === 'ArrowLeft') lightboxPrev();
     if (lightbox.classList.contains('open') && e.key === 'ArrowRight') lightboxNext();

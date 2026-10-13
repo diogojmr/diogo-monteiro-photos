@@ -195,6 +195,7 @@
 
     let token = sessionStorage.getItem('portfolio_github_token') || '';
     let dataSha = '';
+    let busy = false;
     let portfolio = { version: 1, photos: [] };
 
     const authPanel = document.getElementById('auth-panel');
@@ -208,6 +209,14 @@
     function setStatus(element, message, type = '') {
       element.textContent = message;
       element.className = `status ${type}`.trim();
+    }
+
+    function setBusy(value) {
+      busy = value;
+      ['publish-btn', 'refresh-btn', 'logout-btn', 'login-btn'].forEach(id => {
+        document.getElementById(id).disabled = value;
+      });
+      document.querySelectorAll('.photo-actions button').forEach(button => { button.disabled = value; });
     }
 
     function encodeUtf8(value) {
@@ -244,9 +253,10 @@
 
     async function loadPortfolio() {
       const file = await github(`${DATA_PATH}?ref=${BRANCH}&t=${Date.now()}`);
+      const loaded = JSON.parse(decodeUtf8(file.content));
+      if (!loaded || !Array.isArray(loaded.photos)) throw new Error('O catálogo não é válido. Atualize a página antes de publicar.');
       dataSha = file.sha;
-      portfolio = JSON.parse(decodeUtf8(file.content));
-      if (!Array.isArray(portfolio.photos)) portfolio.photos = [];
+      portfolio = loaded;
       if (!Array.isArray(portfolio.galleryOrder)) {
         portfolio.galleryOrder = portfolio.photos.map(photo => photo.src || photo.url);
       }
@@ -365,9 +375,10 @@
     }
 
     async function signIn() {
+      if (busy) return;
       token = tokenInput.value.trim() || token;
       if (!token) return setStatus(authStatus, 'Introduza a chave de acesso.', 'error');
-      loginButton.disabled = true;
+      setBusy(true);
       setStatus(authStatus, 'A verificar o acesso...');
       try {
         await loadPortfolio();
@@ -380,19 +391,33 @@
         token = '';
         setStatus(authStatus, `Não foi possível entrar: ${error.message}`, 'error');
       } finally {
-        loginButton.disabled = false;
+        setBusy(false);
+        renderList();
       }
     }
 
     document.getElementById('photo-form').addEventListener('submit', async event => {
       event.preventDefault();
+      if (busy) return;
       const button = document.getElementById('publish-btn');
       const file = document.getElementById('photo-file').files[0];
-      const url = document.getElementById('photo-url').value.trim();
+      let url = document.getElementById('photo-url').value.trim();
       const category = document.getElementById('category').value;
       const alt = automaticDescription(category);
       if (!file && !url) return setStatus(publishStatus, 'Escolha um ficheiro ou indique uma ligação.', 'error');
-      button.disabled = true;
+      if (!file) {
+        try {
+          const parsed = new URL(url);
+          if (parsed.protocol !== 'https:') throw new Error();
+          url = parsed.href;
+        } catch {
+          return setStatus(publishStatus, 'Indique uma ligação de imagem válida, começada por https://.', 'error');
+        }
+        if (portfolio.galleryOrder.includes(url) || portfolio.photos.some(photo => (photo.src || photo.url) === url)) {
+          return setStatus(publishStatus, 'Esta fotografia já está na galeria.', 'error');
+        }
+      }
+      setBusy(true);
       try {
         const src = file ? await uploadImage(file, category, alt) : url;
         const position = Math.floor(Math.random() * (portfolio.galleryOrder.length + 1));
@@ -409,17 +434,18 @@
         setStatus(publishStatus, `Não foi possível publicar: ${error.message}`, 'error');
         try { await loadPortfolio(); } catch (refreshError) {}
       } finally {
-        button.disabled = false;
+        setBusy(false);
+        renderList();
       }
     });
 
     document.getElementById('photo-list').addEventListener('click', async event => {
       const button = event.target.closest('button[data-action]');
-      if (!button) return;
+      if (!button || busy) return;
       const index = Number(button.dataset.index);
       const action = button.dataset.action;
       if (action === 'delete' && !confirm('Eliminar esta fotografia da galeria?')) return;
-      document.querySelectorAll('.photo-actions button').forEach(item => { item.disabled = true; });
+      setBusy(true);
       const previous = JSON.stringify(portfolio);
       try {
         if (action === 'delete') {
@@ -434,12 +460,27 @@
         portfolio = JSON.parse(previous);
         renderList();
         alert(`Não foi possível atualizar: ${error.message}`);
+      } finally {
+        setBusy(false);
+        renderList();
       }
     });
 
     loginButton.addEventListener('click', signIn);
     tokenInput.addEventListener('keydown', event => { if (event.key === 'Enter') signIn(); });
-    document.getElementById('refresh-btn').addEventListener('click', loadPortfolio);
+    document.getElementById('refresh-btn').addEventListener('click', async () => {
+      if (busy) return;
+      setBusy(true);
+      try {
+        await loadPortfolio();
+        setStatus(publishStatus, 'Galeria atualizada.', 'success');
+      } catch (error) {
+        setStatus(publishStatus, `Não foi possível atualizar: ${error.message}`, 'error');
+      } finally {
+        setBusy(false);
+        renderList();
+      }
+    });
     logoutButton.addEventListener('click', () => {
       sessionStorage.removeItem('portfolio_github_token');
       location.reload();
