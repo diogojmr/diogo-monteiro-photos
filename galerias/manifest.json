@@ -1,0 +1,1 @@
+{"version":1,"encryption":"AES-256-GCM","kdf":"PBKDF2-SHA256","iterations":250000,"salt":"aVqHHY432DTImu/E66nAeQ==","album":{"file":"album.enc","iv":"i2fzI/72S1AjIaRl"}}

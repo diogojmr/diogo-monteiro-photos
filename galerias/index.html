@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="referrer" content="no-referrer" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' blob:; script-src 'self' 'unsafe-eval'; style-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'"
+    />
+    <title>Galeria privada | Diogo Monteiro</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./vendor/lucide.min.js" defer></script>
+    <script src="./vendor/jszip.min.js" defer></script>
+    <script src="./client.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <span class="monogram">D</span><span>Diogo Monteiro<small>Galeria privada</small></span>
+      </div>
+      <button id="lock-gallery" class="secondary" hidden>Fechar sessão</button>
+    </header>
+    <main id="app">
+      <section class="login">
+        <p class="eyebrow">As suas fotografias</p>
+        <h1>Bem-vindo à sua galeria.</h1>
+        <form id="unlock-form">
+          <label
+            >Palavra-passe<input
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              required
+          /></label>
+          <p id="unlock-error" class="form-error" role="alert"></p>
+          <button class="primary" type="submit">Abrir galeria</button>
+        </form>
+      </section>
+    </main>
+    <dialog id="photo-dialog">
+      <button
+        class="icon-button close-photo"
+        data-close="photo-dialog"
+        aria-label="Fechar fotografia"
+      >
+        ×</button
+      ><img id="large-photo" alt="" /><button id="large-download" class="primary">
+        Descarregar original
+      </button>
+    </dialog>
+    <dialog id="selfie-dialog">
+      <form id="selfie-form">
+        <div class="dialog-head">
+          <h2>Encontrar as minhas fotografias</h2>
+          <button type="button" class="icon-button" data-close="selfie-dialog" aria-label="Fechar">
+            ×
+          </button>
+        </div>
+        <label
+          >Fotografia com o seu rosto<input
+            name="selfie"
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            required /></label
+        ><label class="check-line"
+          ><input type="checkbox" name="consent" required />Autorizo a comparação do meu rosto nas
+          fotografias deste álbum para esta pesquisa.</label
+        >
+        <p class="muted">
+          A selfie é analisada neste dispositivo e não fica guardada. Os resultados podem conter
+          erros.
+        </p>
+        <p class="form-error" role="status"></p>
+        <button type="submit" class="primary">Procurar fotografias</button>
+      </form>
+    </dialog>
+    <div id="toast" role="status"></div>
+  </body>
+</html>
