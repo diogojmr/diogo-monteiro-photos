@@ -30,6 +30,34 @@
       "alt_es": "Kart en pista con piloto de casco amarillo",
       "x": 50,
       "y": 50
+    },
+    {
+      "src": "media/portfolio/karting-cmc-461.jpg",
+      "category": "motorsport",
+      "alt": "Piloto de capacete branco nas boxes",
+      "alt_es": "Piloto con casco blanco en boxes",
+      "v": [
+        640,
+        1280
+      ],
+      "w": 2160,
+      "h": 1440,
+      "x": 50,
+      "y": 50
+    },
+    {
+      "src": "media/portfolio/karting-pkc2-1092.jpg",
+      "category": "motorsport",
+      "alt": "Piloto de capacete colorido contra o céu azul",
+      "alt_es": "Piloto con casco de colores contra el cielo azul",
+      "v": [
+        640,
+        1280
+      ],
+      "w": 2048,
+      "h": 1365,
+      "x": 50,
+      "y": 50
     }
   ],
   "services": {
