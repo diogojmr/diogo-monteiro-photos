@@ -816,3 +816,13 @@ $('#tab-reviews').addEventListener('click', async e => {
   }
 });
 if (incomingReview) notify('Recebeste uma avaliação para aprovar. Entra para a rever e publicar.');
+$('#review-paste').addEventListener('submit', e => {
+  e.preventDefault();
+  const value = $('#review-paste-url').value.trim();
+  const review = decodeReviewLink(value.slice(value.indexOf('#')));
+  if (!review) return notify('Essa ligação não tem uma avaliação válida. Copia a ligação completa do email.', 'error');
+  incomingReview = review;
+  $('#review-paste-url').value = '';
+  renderReviews();
+  notify('Avaliação carregada. Revê o texto e publica.');
+});
