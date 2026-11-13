@@ -1,0 +1,128 @@
+{
+  "version": 2,
+  "autoplay": true,
+  "interval": 6,
+  "tagline": {
+    "pt": "Fotografia de desporto em Portugal e Espanha",
+    "es": "Fotografía deportiva en Portugal y España"
+  },
+  "hero": [
+    {
+      "src": "media/portfolio/karting-2h-318.jpg",
+      "category": "motorsport",
+      "alt": "Karts em pista com fundo arrastado",
+      "alt_es": "Karts en pista con el fondo en barrido",
+      "x": 50,
+      "y": 50,
+      "w": 2160,
+      "h": 1440,
+      "v": [
+        640,
+        1280
+      ]
+    },
+    {
+      "src": "media/portfolio/1791799653239-hoquei-fotografia-de-hoquei-em-patins-por-diogo-monteir.jpg",
+      "category": "hoquei",
+      "alt": "Jogador de hóquei em patins número 97 em velocidade",
+      "alt_es": "Jugador de hockey sobre patines dorsal 97 a velocidad",
+      "x": 55,
+      "y": 50,
+      "v": [
+        640,
+        1280
+      ],
+      "w": 1800,
+      "h": 1200
+    },
+    {
+      "src": "media/portfolio/karting-regional-cup-1498.jpg",
+      "category": "motorsport",
+      "alt": "Grande plano de capacete branco e vermelho",
+      "alt_es": "Primer plano de un casco blanco y rojo",
+      "x": 50,
+      "y": 45,
+      "w": 2160,
+      "h": 1440,
+      "v": [
+        640,
+        1280
+      ]
+    },
+    {
+      "src": "media/portfolio/1791799914624-futsal-fotografia-de-futsal-por-diogo-monteiro.jpg",
+      "category": "futsal",
+      "alt": "Dois jogadores de futsal de amarelo abraçam-se",
+      "alt_es": "Dos jugadores de fútbol sala de amarillo se abrazan",
+      "x": 50,
+      "y": 40,
+      "v": [
+        640,
+        1280
+      ],
+      "w": 1800,
+      "h": 1200
+    },
+    {
+      "src": "media/portfolio/karting-pkc2-920.jpg",
+      "category": "motorsport",
+      "alt": "Grande plano de piloto com capacete azul e laranja",
+      "alt_es": "Primer plano de piloto con casco azul y naranja",
+      "x": 50,
+      "y": 45,
+      "w": 2048,
+      "h": 1365,
+      "v": [
+        640,
+        1280
+      ]
+    },
+    {
+      "src": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto/f_auto/c_limit,w_1920/v1781263948/juventude-142_sfrka5.jpg",
+      "category": "hoquei",
+      "alt": "Jogador de hóquei em patins de laranja em ação",
+      "alt_es": "Jugador de hockey sobre patines de naranja en acción",
+      "x": 50,
+      "y": 50
+    }
+  ],
+  "services": {
+    "karting": {
+      "src": "media/portfolio/karting-sodi-galicia-186.jpg",
+      "alt": "Piloto de fato roxo com o capacete debaixo do braço",
+      "x": 50,
+      "y": 35,
+      "alt_es": "Piloto con mono morado y el casco bajo el brazo",
+      "v": [
+        640,
+        1280
+      ],
+      "w": 1365,
+      "h": 2048
+    },
+    "hoquei": {
+      "src": "media/portfolio/1791799596980-hoquei-fotografia-de-hoquei-em-patins-por-diogo-monteir.jpg",
+      "alt": "Jogador de hóquei em patins de verde, número 26, de costas",
+      "x": 50,
+      "y": 40,
+      "alt_es": "Jugador de hockey sobre patines de verde, dorsal 26, de espaldas",
+      "v": [
+        640
+      ],
+      "w": 1200,
+      "h": 1800
+    },
+    "futsal": {
+      "src": "media/portfolio/1791799928007-futsal-fotografia-de-futsal-por-diogo-monteiro.jpg",
+      "alt": "Jogador de futsal de amarelo a rematar",
+      "x": 50,
+      "y": 45,
+      "alt_es": "Jugador de fútbol sala de amarillo rematando",
+      "v": [
+        640
+      ],
+      "w": 1200,
+      "h": 1800
+    }
+  }
+}
