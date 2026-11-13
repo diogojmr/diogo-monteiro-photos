@@ -2,7 +2,7 @@
   const T = {
     es: {
       title: 'Deja tu opinión',
-      intro: 'Gracias por confiar en mi trabajo.',
+      intro: 'Gracias por confiar en mi trabajo. Tu opinión ayuda a otros deportistas, clubes, pilotos y empresas a conocer mi trabajo.',
       name: 'Nombre', team: 'Club, equipo o empresa (opcional)', sport: 'Modalidad',
       hoquei: 'Hockey sobre patines', futsal: 'Fútbol sala', other: 'Otra', rating: 'Valoración', text: 'Comentario',
       consent: 'Autorizo que mi nombre, club y comentario se publiquen en la web diogomonteirophotos.pt.',
