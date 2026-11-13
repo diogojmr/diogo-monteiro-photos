@@ -289,3 +289,6 @@ img{-webkit-user-drag:none;user-select:none;-webkit-touch-callout:none}
 @media (max-width:959px){.footer-grid{grid-template-columns:1fr 1fr}}
 .site-footer .language-switch a{opacity:1;color:var(--ink-2)}
 .icon.brand-icon{fill:currentColor;stroke:none}
+/* contact and social icons: one size */
+.footer-contact .icon,.footer-social .icon,.about-links .icon{width:20px;height:20px;font-size:20px;stroke-width:1.8}
+.footer-contact .icon.brand-icon{stroke:none}
