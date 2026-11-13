@@ -13,13 +13,7 @@
       "alt": "Karts em pista com fundo arrastado",
       "alt_es": "Karts en pista con el fondo en barrido",
       "x": 50,
-      "y": 50,
-      "w": 2160,
-      "h": 1440,
-      "v": [
-        640,
-        1280
-      ]
+      "y": 50
     },
     {
       "src": "media/portfolio/1791799653239-hoquei-fotografia-de-hoquei-em-patins-por-diogo-monteir.jpg",
@@ -27,13 +21,7 @@
       "alt": "Jogador de hóquei em patins número 97 em velocidade",
       "alt_es": "Jugador de hockey sobre patines dorsal 97 a velocidad",
       "x": 55,
-      "y": 50,
-      "v": [
-        640,
-        1280
-      ],
-      "w": 1800,
-      "h": 1200
+      "y": 50
     },
     {
       "src": "media/portfolio/karting-regional-cup-1498.jpg",
@@ -41,13 +29,7 @@
       "alt": "Grande plano de capacete branco e vermelho",
       "alt_es": "Primer plano de un casco blanco y rojo",
       "x": 50,
-      "y": 45,
-      "w": 2160,
-      "h": 1440,
-      "v": [
-        640,
-        1280
-      ]
+      "y": 45
     },
     {
       "src": "media/portfolio/1791799914624-futsal-fotografia-de-futsal-por-diogo-monteiro.jpg",
@@ -55,13 +37,7 @@
       "alt": "Dois jogadores de futsal de amarelo abraçam-se",
       "alt_es": "Dos jugadores de fútbol sala de amarillo se abrazan",
       "x": 50,
-      "y": 40,
-      "v": [
-        640,
-        1280
-      ],
-      "w": 1800,
-      "h": 1200
+      "y": 40
     },
     {
       "src": "media/portfolio/karting-pkc2-920.jpg",
@@ -69,19 +45,35 @@
       "alt": "Grande plano de piloto com capacete azul e laranja",
       "alt_es": "Primer plano de piloto con casco azul y naranja",
       "x": 50,
-      "y": 45,
-      "w": 2048,
-      "h": 1365,
-      "v": [
-        640,
-        1280
-      ]
+      "y": 45
     },
     {
       "src": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto/f_auto/c_limit,w_1920/v1781263948/juventude-142_sfrka5.jpg",
       "category": "hoquei",
       "alt": "Jogador de hóquei em patins de laranja em ação",
       "alt_es": "Jugador de hockey sobre patines de naranja en acción",
+      "x": 50,
+      "y": 50
+    },
+    {
+      "src": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781263968/juventude-192_irdyb8.jpg",
+      "category": "hoquei",
+      "alt": "Jogador de hóquei em patins junto à bancada",
+      "alt_es": "Jugador de hockey sobre patines junto a la grada",
+      "x": 50,
+      "y": 50
+    },
+    {
+      "src": "media/portfolio/karting-tkv-1161.jpg",
+      "category": "motorsport",
+      "alt": "Kart em pista com piloto de capacete amarelo",
+      "alt_es": "Kart en pista con piloto de casco amarillo",
+      "v": [
+        640,
+        1280
+      ],
+      "w": 2048,
+      "h": 1365,
       "x": 50,
       "y": 50
     }
