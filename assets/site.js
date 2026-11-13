@@ -627,3 +627,49 @@
     }
   });
 })();
+
+// Reviews: approved in the admin panel (reviews.json); shown without rebuilding the page
+(() => {
+  const section = document.getElementById('avaliacoes');
+  const grid = document.getElementById('review-grid');
+  if (!section || !grid || location.protocol === 'file:') return;
+  const es = document.documentElement.lang.startsWith('es');
+  const sports = es
+    ? { karting: 'Karting', hoquei: 'Hockey sobre patines', futsal: 'Fútbol sala' }
+    : { karting: 'Karting', hoquei: 'Hóquei em patins', futsal: 'Futsal' };
+  const el = (tag, cls, text) => {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  };
+  fetch('reviews.json?v=' + Math.floor(Date.now() / 60000))
+    .then(r => (r.ok ? r.json() : []))
+    .then(list => {
+      if (!Array.isArray(list)) return;
+      const items = list
+        .filter(r => r && typeof r.text === 'string' && typeof r.name === 'string')
+        .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')))
+        .slice(0, 6);
+      section.hidden = !items.length;
+      grid.replaceChildren(
+        ...items.map(r => {
+          const n = Math.max(1, Math.min(5, Math.round(Number(r.rating) || 5)));
+          const fig = el('figure', 'review-card');
+          const stars = el('p', 'review-stars', '★'.repeat(n));
+          stars.setAttribute('role', 'img');
+          stars.setAttribute('aria-label', n + (es ? ' de 5 estrellas' : ' de 5 estrelas'));
+          stars.append(el('span', '', '★'.repeat(5 - n)));
+          const quote = el('blockquote');
+          quote.append(el('p', '', r.text));
+          const cap = el('figcaption');
+          cap.append(el('strong', '', r.name));
+          const meta = [r.team, sports[r.sport]].filter(x => typeof x === 'string' && x).join(' · ');
+          if (meta) cap.append(el('span', '', meta));
+          fig.append(stars, quote, cap);
+          return fig;
+        }),
+      );
+    })
+    .catch(() => {});
+})();

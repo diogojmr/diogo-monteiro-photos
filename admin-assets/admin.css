@@ -26,3 +26,14 @@
 .pick:hover,.pick:focus-visible{border-color:#171916}
 .pick img{width:100%;height:100%;object-fit:cover}
 .pick .badge{position:absolute;left:4px;bottom:4px;font-size:11px}
+.review-share{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 28px}
+.review-share input{flex:1 1 280px;padding:10px 12px;border:1px solid var(--line);background:#fff}
+.reviews-subtitle{margin:28px 0 12px;font-size:16px}
+.reviews-list{display:grid;gap:12px}
+.review-item{background:#fff;border:1px solid rgba(23,25,22,.12);padding:18px 20px}
+#review-pending .review-item{border:2px solid #a0b824}
+.review-item-stars{margin:0 0 6px;letter-spacing:2px}.review-item-stars span{color:#c9cdc1}
+.review-item blockquote{margin:0 0 8px;white-space:pre-wrap}
+.review-item-meta{margin:0 0 12px;color:var(--muted);font-size:13px}.review-item-meta strong{color:var(--ink)}
+.review-item-actions{display:flex;gap:8px;flex-wrap:wrap}
+#reviews-badge{display:inline-block;min-width:18px;padding:0 5px;margin-left:4px;border-radius:9px;background:var(--lime);color:var(--ink);font-size:11px;text-align:center}

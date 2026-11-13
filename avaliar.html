@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Deixar avaliação | Diogo Monteiro</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/site.css?v=e0591f244e">
+<link rel="stylesheet" href="assets/avaliar.css?v=4516c9af39">
+</head>
+<body class="review-page">
+<main class="review-wrap">
+  <a class="review-logo" href="index.html" aria-label="Diogo Monteiro"><img src="assets/logo.svg" alt="Diogo Monteiro" width="150" height="40"></a>
+  <p class="review-lang"><a href="?l=pt" data-l="pt">PT</a> <a href="?l=es" data-l="es">ES</a></p>
+  <h1 data-t="title">Deixa a tua avaliação</h1>
+  <p class="review-intro" data-t="intro">Obrigado por confiares no meu trabalho. A tua opinião ajuda outros clubes e pilotos a conhecerem as fotografias. Depois de aprovada, pode aparecer no site.</p>
+  <form id="review-form" action="https://formspree.io/f/xeewdepr" method="POST" novalidate>
+    <input type="hidden" name="_subject" value="Nova avaliação no site">
+    <input type="hidden" name="Tipo" value="Avaliação">
+    <input type="hidden" name="Aprovar_no_painel" id="approve-link" value="">
+    <p class="hp" aria-hidden="true"><label>Não preencher <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
+    <label><span data-t="name">Nome</span><input name="Nome" id="r-name" maxlength="60" required autocomplete="name"></label>
+    <label><span data-t="team">Clube, equipa ou empresa (opcional)</span><input name="Clube_ou_equipa" id="r-team" maxlength="60" autocomplete="organization"></label>
+    <label><span data-t="sport">Modalidade</span>
+      <select name="Modalidade" id="r-sport" required>
+        <option value="karting">Karting</option>
+        <option value="hoquei" data-t="hoquei">Hóquei em patins</option>
+        <option value="futsal" data-t="futsal">Futsal</option>
+        <option value="outro" data-t="other">Outra</option>
+      </select>
+    </label>
+    <fieldset class="stars-input"><legend data-t="rating">Avaliação</legend>
+      <div class="stars-row">
+        <input type="radio" name="Estrelas" id="s5" value="5" checked><label for="s5" title="5">★</label>
+        <input type="radio" name="Estrelas" id="s4" value="4"><label for="s4" title="4">★</label>
+        <input type="radio" name="Estrelas" id="s3" value="3"><label for="s3" title="3">★</label>
+        <input type="radio" name="Estrelas" id="s2" value="2"><label for="s2" title="2">★</label>
+        <input type="radio" name="Estrelas" id="s1" value="1"><label for="s1" title="1">★</label>
+      </div>
+    </fieldset>
+    <label><span data-t="text">Comentário</span><textarea name="Comentario" id="r-text" rows="5" maxlength="600" required></textarea><small id="r-count">0/600</small></label>
+    <label class="check"><input type="checkbox" name="Autorizacao" id="r-consent" value="Sim" required> <span data-t="consent">Autorizo que o meu nome, clube e comentário sejam publicados no site diogomonteirophotos.pt.</span></label>
+    <button class="button primary" type="submit" data-t="send">Enviar avaliação</button>
+    <p id="review-status" role="status" aria-live="polite"></p>
+  </form>
+</main>
+<script src="assets/avaliar.js?v=04dad6391b" defer></script>
+</body>
+</html>

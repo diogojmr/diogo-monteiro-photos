@@ -216,9 +216,12 @@ export class GitHubStore {
       ['site-settings.json', settings],
     ])
       tree.push({ path, mode: '100644', type: 'blob', content: JSON.stringify(value, null, 2) + '\n' });
-    const newTree = await this.request('/git/trees', 'POST', { base_tree: parent.tree.sha, tree });
+    return this.commitTree(parent.tree.sha, tree, 'Atualizar galeria e destaque pelo painel de administração');
+  }
+  async commitTree(baseTree, tree, message) {
+    const newTree = await this.request('/git/trees', 'POST', { base_tree: baseTree, tree });
     const commit = await this.request('/git/commits', 'POST', {
-      message: 'Atualizar galeria e destaque pelo painel de administração',
+      message,
       tree: newTree.sha,
       parents: [this.loadedHead],
     });
@@ -240,6 +243,57 @@ export class GitHubStore {
     }
     this.loadedHead = commit.sha;
     return commit.sha;
+  }
+  async readReviews() {
+    return normalizeReviews(await this.read('reviews.json', true));
+  }
+  // reviews are published on their own, straight away, without touching the photo draft
+  async saveReviews(reviews, message) {
+    if (!this.loadedHead) throw Error('Entra novamente antes de publicar.');
+    const ref = await this.request('/git/ref/heads/' + this.branch);
+    if (ref.object.sha !== this.loadedHead)
+      throw Error('Existem alterações mais recentes no GitHub. Recarrega a base e tenta de novo.');
+    const parent = await this.request('/git/commits/' + this.loadedHead);
+    const content = JSON.stringify(normalizeReviews(reviews), null, 2) + '\n';
+    return this.commitTree(parent.tree.sha, [{ path: 'reviews.json', mode: '100644', type: 'blob', content }], message);
+  }
+}
+
+const SPORTS = ['karting', 'hoquei', 'futsal', 'outro'];
+const cleanText = (v, max) => String(v ?? '').replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, '').trim().slice(0, max);
+export function normalizeReview(r) {
+  if (!r || typeof r !== 'object') return null;
+  const review = {
+    name: cleanText(r.name, 60),
+    team: cleanText(r.team, 60),
+    sport: SPORTS.includes(r.sport) ? r.sport : 'outro',
+    rating: Math.max(1, Math.min(5, Math.round(Number(r.rating) || 5))),
+    text: cleanText(r.text, 600),
+    lang: r.lang === 'es' ? 'es' : 'pt',
+    date: /^\d{4}-\d{2}-\d{2}$/.test(r.date) ? r.date : new Date().toISOString().slice(0, 10),
+  };
+  if (!review.name || !review.text) return null;
+  review.id = r.id && /^[a-z0-9-]{4,40}$/.test(r.id) ? r.id : reviewId(review);
+  return review;
+}
+export function reviewId(r) {
+  let h = 2166136261;
+  for (const ch of r.name + '|' + r.text + '|' + r.date) h = Math.imul(h ^ ch.codePointAt(0), 16777619) >>> 0;
+  return 'r-' + h.toString(36);
+}
+export function normalizeReviews(list) {
+  return (Array.isArray(list) ? list : []).map(normalizeReview).filter(Boolean);
+}
+export function decodeReviewLink(hash) {
+  const m = /(?:^|[#&])avaliacao=([A-Za-z0-9_-]+)/.exec(hash || '');
+  if (!m) return null;
+  try {
+    const b64 = m[1].replace(/-/g, '+').replace(/_/g, '/');
+    const bin = atob(b64 + '='.repeat((4 - (b64.length % 4)) % 4));
+    const json = new TextDecoder().decode(Uint8Array.from(bin, c => c.charCodeAt(0)));
+    return normalizeReview(JSON.parse(json));
+  } catch {
+    return null;
   }
 }
 

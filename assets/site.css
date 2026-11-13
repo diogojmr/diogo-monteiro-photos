@@ -292,3 +292,13 @@ img{-webkit-user-drag:none;user-select:none;-webkit-touch-callout:none}
 /* contact and social icons: one size */
 .footer-contact .icon,.footer-social .icon,.about-links .icon{width:20px;height:20px;font-size:20px;stroke-width:1.8}
 .footer-contact .icon.brand-icon{stroke:none}
+/* reviews */
+.band-reviews{background:var(--bg-2)}
+.review-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-top:40px}
+.review-card{margin:0;padding:28px;background:var(--bg);border:1px solid var(--line);display:flex;flex-direction:column;gap:16px}
+.review-stars{margin:0;color:var(--ink);letter-spacing:2px;font-size:16px}
+.review-stars span{color:var(--line-strong)}
+.review-card blockquote{margin:0;flex:1}
+.review-card blockquote p{margin:0;font-size:16px;line-height:1.6;color:var(--ink)}
+.review-card figcaption{display:flex;flex-direction:column;gap:2px;font-size:14px;color:var(--ink-2)}
+.review-card figcaption strong{color:var(--ink);font-weight:600}

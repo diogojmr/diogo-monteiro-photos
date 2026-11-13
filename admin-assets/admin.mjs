@@ -12,6 +12,8 @@ import {
   addPhoto,
   validateState,
   GitHubStore,
+  normalizeReviews,
+  decodeReviewLink,
 } from './core.mjs';
 const $ = s => document.querySelector(s),
   $$ = s => [...document.querySelectorAll(s)];
@@ -34,6 +36,10 @@ const selected = new Set(),
   pending = new Map();
 let queue = [];
 let deletions = []; // repository files to delete in the next publish
+let reviews = [];
+// a review arrives through the link in the Formspree email: admin.html#avaliacao=...
+let incomingReview = decodeReviewLink(location.hash);
+if (location.hash.includes('avaliacao=')) history.replaceState(null, '', location.pathname + location.search);
 const notify = (text, type = '') => {
   $('#notice').textContent = text;
   $('#notice').className = type;
@@ -69,7 +75,9 @@ function tab(name) {
     hero: 'Destaque inicial',
     content: 'Textos do destaque',
     services: 'Fotografias dos serviços',
+    reviews: 'Avaliações',
   }[name];
+  if (name === 'reviews') renderReviews();
   if (name === 'services') renderServices();
   if (name === 'hero') renderHero();
   window.scrollTo({ top: 0, behavior: 'instant' });
@@ -191,6 +199,7 @@ async function start(preview = false) {
       catalog = normalizeCatalog(result[0]);
       base = result[1];
       settings = normalizeSettings(result[2], defaults);
+      reviews = normalizeReviews(await getJSON('reviews.json', { cache: 'no-store' }).catch(() => []));
       store = null;
     } else {
       const token = $('#token').value.trim();
@@ -200,6 +209,7 @@ async function start(preview = false) {
       catalog = result.catalog;
       base = result.base;
       settings = result.settings;
+      reviews = await store.readReviews();
       $('#token').value = '';
     }
     validateState(catalog, settings);
@@ -209,7 +219,7 @@ async function start(preview = false) {
     $('#workspace').hidden = false;
     renderContent();
     renderGallery();
-    tab('gallery');
+    tab(incomingReview ? 'reviews' : 'gallery');
     notify(
       preview
         ? 'Modo de pré-visualização: podes experimentar o painel. Nada será publicado.'
@@ -739,3 +749,70 @@ $('#picker-grid').addEventListener('click', e => {
   renderServices();
   notify('Fotografia do serviço escolhida. Publica para aplicar no site.');
 });
+
+// ---------------------------------------------------------------- reviews
+const SPORT_NAMES = { karting: 'Karting', hoquei: 'Hóquei em patins', futsal: 'Futsal', outro: 'Outra modalidade' };
+function reviewCard(r, actions) {
+  const meta = [r.team, SPORT_NAMES[r.sport], r.date, r.lang === 'es' ? 'ES' : 'PT'].filter(Boolean).map(escape).join(' · ');
+  return `<article class="review-item"><p class="review-item-stars" aria-label="${r.rating} de 5 estrelas">${'★'.repeat(r.rating)}<span>${'★'.repeat(5 - r.rating)}</span></p><blockquote>${escape(r.text)}</blockquote><p class="review-item-meta"><strong>${escape(r.name)}</strong> ${meta}</p><div class="review-item-actions">${actions}</div></article>`;
+}
+function renderReviews() {
+  $('#reviews-badge').hidden = !incomingReview;
+  const known = incomingReview && reviews.some(r => r.id === incomingReview.id);
+  $('#review-pending').innerHTML = incomingReview
+    ? `<h3 class="reviews-subtitle">Por aprovar</h3>${known ? '<p class="help">Esta avaliação já está publicada.</p>' : ''}${reviewCard(incomingReview, known ? '<button class="button" data-review-dismiss>Fechar</button>' : '<button class="button primary" data-review-approve>Publicar no site</button> <button class="button" data-review-dismiss>Rejeitar</button>')}`
+    : '';
+  $('#reviews-list').innerHTML = reviews.length
+    ? reviews
+        .slice()
+        .sort((a, b) => b.date.localeCompare(a.date))
+        .map(r => reviewCard(r, `<button class="button" data-review-remove="${escape(r.id)}">Retirar do site</button>`))
+        .join('')
+    : '<p class="help">Ainda não há avaliações publicadas.</p>';
+}
+async function saveReviews(next, message, success) {
+  if (busy) return;
+  if (demo || !store) return notify('No modo de pré-visualização nada é publicado.', 'error');
+  lock(true);
+  notify('A guardar no GitHub…');
+  try {
+    await store.saveReviews(next, message);
+    reviews = normalizeReviews(next);
+    notify(success, 'success');
+    return true;
+  } catch (e) {
+    notify(e.message, 'error');
+    return false;
+  } finally {
+    lock(false);
+    renderReviews();
+  }
+}
+$('#tab-reviews').addEventListener('click', async e => {
+  const b = e.target.closest('button');
+  if (!b) return;
+  if (b.hasAttribute('data-review-approve') && incomingReview) {
+    const ok = await saveReviews([...reviews, incomingReview], 'Publicar avaliação de ' + incomingReview.name, 'Avaliação publicada. Aparece no site dentro de alguns minutos.');
+    if (ok) incomingReview = null;
+    renderReviews();
+  } else if (b.hasAttribute('data-review-dismiss')) {
+    incomingReview = null;
+    renderReviews();
+    notify('Avaliação rejeitada. Não foi publicada.');
+  } else if (b.dataset.reviewRemove) {
+    const r = reviews.find(x => x.id === b.dataset.reviewRemove);
+    if (!r || !confirm('Retirar do site a avaliação de ' + r.name + '?')) return;
+    await saveReviews(reviews.filter(x => x !== r), 'Retirar avaliação de ' + r.name, 'Avaliação retirada do site.');
+  } else if (b.id === 'copy-review-link' || b.id === 'copy-review-link-es') {
+    const url = 'https://diogomonteirophotos.pt/avaliar.html' + (b.id.endsWith('-es') ? '?l=es' : '');
+    try {
+      await navigator.clipboard.writeText(url);
+      notify('Ligação copiada: ' + url, 'success');
+    } catch {
+      $('#review-link').value = url;
+      $('#review-link').select();
+      notify('Copia a ligação selecionada.');
+    }
+  }
+});
+if (incomingReview) notify('Recebeste uma avaliação para aprovar. Entra para a rever e publicar.');

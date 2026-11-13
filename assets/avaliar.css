@@ -1,0 +1,28 @@
+.review-page{background:var(--bg);color:var(--ink);font-family:var(--text)}
+.review-wrap{max-width:620px;margin:0 auto;padding:40px 20px 80px}
+.review-logo img{display:block;height:40px;width:auto}
+.review-lang{display:flex;gap:12px;font-size:13px;margin:24px 0 0}
+.review-lang a{color:var(--ink-2);text-decoration:none}
+.review-lang a[aria-current]{color:var(--ink);border-bottom:1px solid var(--ink)}
+.review-wrap h1{font-family:var(--display);font-weight:600;text-transform:uppercase;font-size:clamp(34px,7vw,52px);line-height:1;margin:20px 0 14px}
+.review-intro{color:var(--ink-2);line-height:1.6;margin:0 0 32px}
+#review-form{display:flex;flex-direction:column;gap:20px}
+#review-form>label,#review-form fieldset{display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:500;border:0;padding:0;margin:0}
+#review-form input:not([type=radio]):not([type=checkbox]),#review-form select,#review-form textarea{font:inherit;font-size:16px;font-weight:400;padding:12px 14px;border:1px solid var(--line-strong);background:#fff;color:var(--ink);border-radius:0}
+#review-form textarea{resize:vertical;min-height:120px}
+#review-form small{align-self:flex-end;color:var(--ink-2);font-weight:400}
+#review-form .check{flex-direction:row;align-items:flex-start;gap:10px;font-weight:400;line-height:1.5}
+#review-form .check input{margin-top:4px;width:18px;height:18px;flex:none}
+.hp{position:absolute;left:-9999px}
+.stars-row{display:flex;flex-direction:row-reverse;justify-content:flex-end;gap:4px}
+.stars-row input{position:absolute;opacity:0;width:1px;height:1px}
+.stars-row label{font-size:34px;line-height:1;color:var(--line-strong);cursor:pointer;padding:2px}
+.stars-row input:checked~label,.stars-row label:hover,.stars-row label:hover~label{color:var(--ink)}
+.stars-row input:focus-visible+label{outline:2px solid var(--ink);outline-offset:2px}
+#review-form button{align-self:flex-start}
+#review-status{margin:0;min-height:1.4em}
+#review-status.error{color:#a3261b}
+.review-done{padding:28px;background:var(--bg-2);line-height:1.6}
+#review-form button[type=submit]{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border:0;background:var(--ink);color:var(--bg);font:600 15px var(--text);cursor:pointer}
+#review-form button[type=submit]:hover{background:#000}
+#review-form button[type=submit]:disabled{opacity:.6;cursor:wait}
