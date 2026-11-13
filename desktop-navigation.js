@@ -4,7 +4,6 @@
   const phone = document.querySelector('[name="telemovel"]');
 
   function updateLayout() {
-    if (phone) phone.disabled = !desktop.matches;
     if (services) services.open = false;
     const overlay = document.getElementById('nav-overlay');
     if (desktop.matches && overlay?.classList.contains('open')) {

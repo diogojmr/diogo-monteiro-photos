@@ -1,0 +1,523 @@
+[
+ {
+  "src": "media/portfolio/karting-redline-481.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Piloto de fato vermelho com o capacete na mão",
+  "alt_es": "Piloto con mono rojo y el casco en la mano",
+  "w": 1365,
+  "h": 2048,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742455/redline-481_ico7ru.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781263937/juventude-106_eenfvr.jpg",
+  "category": "hoquei",
+  "label": "Hóquei em Patins",
+  "alt": "Jogadores de equipamento laranja durante um jogo de hóquei em patins",
+  "alt_es": "Jugadores de naranja durante un partido de hockey sobre patines",
+  "w": 1365,
+  "h": 2048
+ },
+ {
+  "src": "media/portfolio/karting-regional-cup-2517.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Piloto com a placa de classificação no Kartódromo de Viana",
+  "alt_es": "Piloto con el cartel de clasificación en el Kartódromo de Viana",
+  "w": 2160,
+  "h": 1440,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742456/regionalcup-2517_x7gsed.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-cmc-825.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Piloto a colocar o capacete branco",
+  "alt_es": "Piloto poniéndose el casco blanco",
+  "w": 1365,
+  "h": 2048,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742453/cmc-825_nvunpd.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781263941/juventude-108_irroow.jpg",
+  "category": "hoquei",
+  "label": "Hóquei em Patins",
+  "alt": "Jogador de hóquei em patins de laranja a conduzir a bola",
+  "alt_es": "Jugador de hockey sobre patines de naranja conduciendo la bola",
+  "w": 1365,
+  "h": 2048
+ },
+ {
+  "src": "media/portfolio/karting-tkv-10.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Piloto de capacete verde e laranja, de perfil",
+  "alt_es": "Piloto con casco verde y naranja, de perfil",
+  "w": 1365,
+  "h": 2048,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742460/tkv-10_futjxg.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-pkc2-2725.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Karts em pista, vistos de frente",
+  "alt_es": "Karts en pista, vistos de frente",
+  "w": 2048,
+  "h": 1365,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742454/pkc2-2725_pofefy.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781263948/juventude-142_sfrka5.jpg",
+  "category": "hoquei",
+  "label": "Hóquei em Patins",
+  "alt": "Jogador de hóquei em patins de laranja em ação",
+  "alt_es": "Jugador de hockey sobre patines de naranja en acción",
+  "w": 2048,
+  "h": 1365
+ },
+ {
+  "src": "media/portfolio/karting-sodi-galicia-186.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Piloto de fato roxo com o capacete debaixo do braço",
+  "alt_es": "Piloto con mono morado y el casco bajo el brazo",
+  "w": 1365,
+  "h": 2048,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742457/sodigalicia-186_sywnh1.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-sodi-galicia-563.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Piloto de capacete branco e fato roxo, de perfil",
+  "alt_es": "Piloto con casco blanco y mono morado, de perfil",
+  "w": 1365,
+  "h": 2048,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742458/sodigalicia-563_ifrtf6.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781263968/juventude-192_irdyb8.jpg",
+  "category": "hoquei",
+  "label": "Hóquei em Patins",
+  "alt": "Jogador de hóquei em patins junto à bancada",
+  "alt_es": "Jugador de hockey sobre patines junto a la grada",
+  "w": 2048,
+  "h": 1365
+ },
+ {
+  "src": "media/portfolio/karting-tkv-182.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Piloto de capacete verde a ajustar a viseira",
+  "alt_es": "Piloto con casco verde ajustando la visera",
+  "w": 1365,
+  "h": 2048,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742461/tkv-182_bzyfbd.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-cmc-1247.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Mãos do piloto no volante, a preto e branco",
+  "alt_es": "Manos del piloto en el volante, en blanco y negro",
+  "w": 2160,
+  "h": 1440,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742453/cmc-1247_wckfnb.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781263991/juventude-258_tancoq.jpg",
+  "category": "hoquei",
+  "label": "Hóquei em Patins",
+  "alt": "Jogadores de hóquei em patins em movimento durante o jogo",
+  "alt_es": "Jugadores de hockey sobre patines en movimiento durante el partido",
+  "w": 2048,
+  "h": 1365
+ },
+ {
+  "src": "media/portfolio/karting-pkc-1936.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Piloto de capacete vermelho e amarelo sentado no kart",
+  "alt_es": "Piloto con casco rojo y amarillo sentado en el kart",
+  "w": 1365,
+  "h": 2048,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742455/pkc-1936_pzq2d5.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-2h-325.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Kart em velocidade, com fundo arrastado",
+  "alt_es": "Kart a velocidad, con el fondo en barrido",
+  "w": 2160,
+  "h": 1440,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742452/2h-325_eqy6id.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-regional-cup-96.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Briefing de pilotos antes da prova",
+  "alt_es": "Briefing de pilotos antes de la carrera",
+  "w": 2160,
+  "h": 1440,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742457/regionalcup-96_nnnwli.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-sodi-galicia-1868.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Piloto de fato verde e branco com capacete azul",
+  "alt_es": "Piloto con mono verde y blanco y casco azul",
+  "w": 1365,
+  "h": 2048,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742460/sodigalicia-1868_kc5s1r.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-cmc-474.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Piloto de capacete branco sentado no kart",
+  "alt_es": "Piloto con casco blanco sentado en el kart",
+  "w": 1365,
+  "h": 2048,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742454/cmc-474_rag5zk.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-pkc2-944.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Piloto de capacete verde contra o céu",
+  "alt_es": "Piloto con casco verde contra el cielo",
+  "w": 2048,
+  "h": 1365,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742453/pkc2-944_e0bsjf.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-sodi-galicia-578.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Piloto de capacete azul e branco a ajustar as luvas",
+  "alt_es": "Piloto con casco azul y blanco ajustándose los guantes",
+  "w": 1365,
+  "h": 2048,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742458/sodigalicia-578_woeino.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-regional-cup-1498.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Grande plano de capacete branco e vermelho",
+  "alt_es": "Primer plano de un casco blanco y rojo",
+  "w": 2160,
+  "h": 1440,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742456/regionalcup-1498_z2tw29.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-tkv-1161.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Kart em pista com piloto de capacete amarelo",
+  "alt_es": "Kart en pista con piloto de casco amarillo",
+  "w": 2048,
+  "h": 1365,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742461/tkv-1161_fx4ari.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-cmc-1099.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Piloto de capacete vermelho na grelha",
+  "alt_es": "Piloto con casco rojo en la parrilla",
+  "w": 2160,
+  "h": 1440,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742455/cmc-1099_vdpz2p.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-sodi-galicia-304.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Volante de kart com o ecrã de dados, a preto e branco",
+  "alt_es": "Volante de kart con la pantalla de datos, en blanco y negro",
+  "w": 1365,
+  "h": 2048,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742457/sodigalicia-304_nnvumj.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-cmc-461.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Piloto de capacete branco nas boxes",
+  "alt_es": "Piloto con casco blanco en boxes",
+  "w": 2160,
+  "h": 1440,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742453/cmc-461_oyzubm.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-pkc-724.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Luvas no volante do kart, a preto e branco",
+  "alt_es": "Guantes en el volante del kart, en blanco y negro",
+  "w": 2048,
+  "h": 1536,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742455/pkc-724_fgfiz7.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-sodi-galicia-568.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Piloto de capacete azul-claro a ajustar o capacete",
+  "alt_es": "Piloto con casco azul claro ajustándose el casco",
+  "w": 1365,
+  "h": 2048,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742458/sodigalicia-568_niaigp.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-sodi-galicia-306.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Grande plano de capacete verde e azul",
+  "alt_es": "Primer plano de un casco verde y azul",
+  "w": 2048,
+  "h": 1365,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742457/sodigalicia-306_rttzxx.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-pkc2-1092.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Piloto de capacete colorido contra o céu azul",
+  "alt_es": "Piloto con casco de colores contra el cielo azul",
+  "w": 2048,
+  "h": 1365,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742454/pkc2-1092_uxesf8.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-pkc2-920.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Grande plano de piloto com capacete azul e laranja",
+  "alt_es": "Primer plano de piloto con casco azul y naranja",
+  "w": 2048,
+  "h": 1365,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742452/pkc2-920_qddy1n.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-tkv-501.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Piloto de capacete vermelho, de perfil",
+  "alt_es": "Piloto con casco rojo, de perfil",
+  "w": 1365,
+  "h": 2048,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742460/tkv-501_olnhgp.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-sodi-galicia-14.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Retrato de piloto de fato preto e vermelho",
+  "alt_es": "Retrato de piloto con mono negro y rojo",
+  "w": 2048,
+  "h": 1365,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742457/sodigalicia-14_uborff.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-cmc-165.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Piloto a ajustar o capacete branco nas boxes",
+  "alt_es": "Piloto ajustándose el casco blanco en boxes",
+  "w": 2160,
+  "h": 1440,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742453/cmc-165_yimga9.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-cmc-167.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Piloto de capacete preto, de costas",
+  "alt_es": "Piloto con casco negro, de espaldas",
+  "w": 1365,
+  "h": 2048,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742452/cmc-167_kscfwr.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-sodi-galicia-305.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Mão com luva no volante do kart",
+  "alt_es": "Mano con guante en el volante del kart",
+  "w": 1365,
+  "h": 2048,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742457/sodigalicia-305_xs6ilb.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-regional-cup-99.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Diretor de prova durante o briefing",
+  "alt_es": "Director de carrera durante el briefing",
+  "w": 2160,
+  "h": 1440,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742455/regionalcup-99_yrkhma.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-pkc-717.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Piloto de capacete azul-claro",
+  "alt_es": "Piloto con casco azul claro",
+  "w": 2048,
+  "h": 1365,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742454/pkc-717_yykpgq.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ },
+ {
+  "src": "media/portfolio/karting-sodi-galicia-564.jpg",
+  "category": "motorsport",
+  "label": "Karts",
+  "alt": "Piloto de capacete branco junto à tenda da equipa",
+  "alt_es": "Piloto con casco blanco junto a la carpa del equipo",
+  "w": 1365,
+  "h": 2048,
+  "cloud": "https://res.cloudinary.com/dejrcqzgb/image/upload/q_auto:best/f_auto/w_1200/v1781742458/sodigalicia-564_a4m6cv.jpg",
+  "v": [
+   640,
+   1280
+  ]
+ }
+]
