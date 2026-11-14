@@ -14,7 +14,7 @@ import {
   GitHubStore,
   normalizeReviews,
   decodeReviewLink,
-} from './core.mjs';
+} from './core.mjs?v=fef31a266a';
 const $ = s => document.querySelector(s),
   $$ = s => [...document.querySelectorAll(s)];
 const escape = s =>
@@ -760,7 +760,7 @@ function renderReviews() {
   $('#reviews-badge').hidden = !incomingReview;
   const known = incomingReview && reviews.some(r => r.id === incomingReview.id);
   $('#review-pending').innerHTML = incomingReview
-    ? `<h3 class="reviews-subtitle">Por aprovar</h3>${known ? '<p class="help">Esta avaliação já está publicada.</p>' : ''}${reviewCard(incomingReview, known ? '<button class="button" data-review-dismiss>Fechar</button>' : '<button class="button primary" data-review-approve>Publicar no site</button> <button class="button" data-review-dismiss>Rejeitar</button>')}`
+    ? `<h3 class="reviews-subtitle">Por aprovar</h3>${known ? '<p class="help">Esta avaliação já está publicada.</p>' : ''}${reviewCard(incomingReview, known ? '<button class="button" data-review-dismiss>Fechar</button>' : '<button class="button primary" data-review-approve>Publicar no site</button> <button class="button" data-review-dismiss>Rejeitar</button> <button class="button" data-review-lang>' + (incomingReview.lang === 'es' ? 'Marcar como português' : 'Marcar como espanhol') + '</button>')}`
     : '';
   $('#reviews-list').innerHTML = reviews.length
     ? reviews
@@ -793,6 +793,9 @@ $('#tab-reviews').addEventListener('click', async e => {
   if (b.hasAttribute('data-review-approve') && incomingReview) {
     const ok = await saveReviews({ add: incomingReview }, 'Publicar avaliação de ' + incomingReview.name, 'Avaliação publicada. Aparece no site dentro de alguns minutos.');
     if (ok) incomingReview = null;
+    renderReviews();
+  } else if (b.hasAttribute('data-review-lang') && incomingReview) {
+    incomingReview = { ...incomingReview, lang: incomingReview.lang === 'es' ? 'pt' : 'es' };
     renderReviews();
   } else if (b.hasAttribute('data-review-dismiss')) {
     incomingReview = null;

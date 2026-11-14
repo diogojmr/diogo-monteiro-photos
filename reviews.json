@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "name": "João Afonso Pereira",
+    "team": "MeMo Racing Team",
+    "sport": "karting",
+    "rating": 5,
+    "text": "Óptimo fotógrafo e pessoa 5*. Totalmente recomendado. Contratem que não se vão arrepender.",
+    "lang": "pt",
+    "date": "2026-11-13",
+    "id": "r-11npyrc"
+  },
+  {
+    "name": "David Cruz",
+    "team": "Amodiño / Sodi Galicia",
+    "sport": "karting",
+    "rating": 5,
+    "text": "Un trabajo excelente en todas las veces que hemos tenido el placer de contar con el . Sin duda, un gran profesional !",
+    "lang": "es",
+    "date": "2026-11-13",
+    "id": "r-viwalz"
+  }
+]
