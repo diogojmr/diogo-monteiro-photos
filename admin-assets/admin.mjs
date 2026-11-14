@@ -770,14 +770,13 @@ function renderReviews() {
         .join('')
     : '<p class="help">Ainda não há avaliações publicadas.</p>';
 }
-async function saveReviews(next, message, success) {
+async function saveReviews(change, message, success) {
   if (busy) return;
   if (demo || !store) return notify('No modo de pré-visualização nada é publicado.', 'error');
   lock(true);
   notify('A guardar no GitHub…');
   try {
-    await store.saveReviews(next, message);
-    reviews = normalizeReviews(next);
+    reviews = await store.saveReviews(change, message);
     notify(success, 'success');
     return true;
   } catch (e) {
@@ -792,7 +791,7 @@ $('#tab-reviews').addEventListener('click', async e => {
   const b = e.target.closest('button');
   if (!b) return;
   if (b.hasAttribute('data-review-approve') && incomingReview) {
-    const ok = await saveReviews([...reviews, incomingReview], 'Publicar avaliação de ' + incomingReview.name, 'Avaliação publicada. Aparece no site dentro de alguns minutos.');
+    const ok = await saveReviews({ add: incomingReview }, 'Publicar avaliação de ' + incomingReview.name, 'Avaliação publicada. Aparece no site dentro de alguns minutos.');
     if (ok) incomingReview = null;
     renderReviews();
   } else if (b.hasAttribute('data-review-dismiss')) {
@@ -802,7 +801,7 @@ $('#tab-reviews').addEventListener('click', async e => {
   } else if (b.dataset.reviewRemove) {
     const r = reviews.find(x => x.id === b.dataset.reviewRemove);
     if (!r || !confirm('Retirar do site a avaliação de ' + r.name + '?')) return;
-    await saveReviews(reviews.filter(x => x !== r), 'Retirar avaliação de ' + r.name, 'Avaliação retirada do site.');
+    await saveReviews({ removeId: r.id }, 'Retirar avaliação de ' + r.name, 'Avaliação retirada do site.');
   } else if (b.id === 'copy-review-link' || b.id === 'copy-review-link-es') {
     const url = 'https://diogomonteirophotos.pt/avaliar.html' + (b.id.endsWith('-es') ? '?l=es' : '');
     try {

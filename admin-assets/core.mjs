@@ -145,6 +145,7 @@ export class GitHubStore {
   async request(path, method = 'GET', body) {
     const r = await this.fetcher(this.root + path, {
       method,
+      cache: 'no-store', // GitHub answers GETs with max-age=60: a cached ref would point at an old commit
       headers: {
         Accept: 'application/vnd.github+json',
         Authorization: 'Bearer ' + this.token,
@@ -247,15 +248,38 @@ export class GitHubStore {
   async readReviews() {
     return normalizeReviews(await this.read('reviews.json', true));
   }
-  // reviews are published on their own, straight away, without touching the photo draft
-  async saveReviews(reviews, message) {
-    if (!this.loadedHead) throw Error('Entra novamente antes de publicar.');
-    const ref = await this.request('/git/ref/heads/' + this.branch);
-    if (ref.object.sha !== this.loadedHead)
-      throw Error('Existem alterações mais recentes no GitHub. Recarrega a base e tenta de novo.');
-    const parent = await this.request('/git/commits/' + this.loadedHead);
-    const content = JSON.stringify(normalizeReviews(reviews), null, 2) + '\n';
-    return this.commitTree(parent.tree.sha, [{ path: 'reviews.json', mode: '100644', type: 'blob', content }], message);
+  // reviews are published on their own, straight away, on top of the latest commit:
+  // they never conflict with the photo draft or with another open tab
+  async saveReviews(change, message) {
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const head = (await this.request('/git/ref/heads/' + this.branch)).object.sha;
+      let current = [];
+      try {
+        current = normalizeReviews(JSON.parse(decodeText((await this.request('/contents/reviews.json?ref=' + head)).content)));
+      } catch (e) {
+        if (e.status !== 404) throw e;
+      }
+      let next = current;
+      if (change.add) next = current.some(r => r.id === change.add.id) ? current : [...current, change.add];
+      if (change.removeId) next = current.filter(r => r.id !== change.removeId);
+      if (next === current && !change.removeId) return current;
+      const parent = await this.request('/git/commits/' + head);
+      const content = JSON.stringify(next, null, 2) + '\n';
+      const tree = await this.request('/git/trees', 'POST', {
+        base_tree: parent.tree.sha,
+        tree: [{ path: 'reviews.json', mode: '100644', type: 'blob', content }],
+      });
+      const commit = await this.request('/git/commits', 'POST', { message, tree: tree.sha, parents: [head] });
+      try {
+        await this.request('/git/refs/heads/' + this.branch, 'PATCH', { sha: commit.sha, force: false });
+      } catch (e) {
+        if (e.status === 422) continue; // someone else committed meanwhile: retry on the new head
+        throw e;
+      }
+      if (this.loadedHead === head) this.loadedHead = commit.sha;
+      return next;
+    }
+    throw Error('O GitHub está ocupado. Tenta novamente daqui a pouco.');
   }
 }
 
