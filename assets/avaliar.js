@@ -69,8 +69,19 @@
     status.className = '';
     status.textContent = '';
     try {
-      const res = await fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
-      if (!res.ok) throw Error(res.status);
+      // 1) the site's server keeps it in "Por aprovar" in the panel (Cloudflare)
+      const saved = await fetch('/api/avaliacoes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...review, consent: true, website: form.querySelector('[name=_gotcha]').value }),
+      })
+        .then(r => r.ok)
+        .catch(() => false);
+      // 2) email notice with the approval link (also the fallback when the server is not available)
+      const mailed = await fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) })
+        .then(r => r.ok)
+        .catch(() => false);
+      if (!saved && !mailed) throw Error('falhou');
       const done = document.createElement('p');
       done.className = 'review-done';
       done.textContent = t.done;

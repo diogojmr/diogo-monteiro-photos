@@ -14,7 +14,7 @@ import {
   GitHubStore,
   normalizeReviews,
   decodeReviewLink,
-} from './core.mjs?v=fef31a266a';
+} from './core.mjs?v=6bded8f602';
 const $ = s => document.querySelector(s),
   $$ = s => [...document.querySelectorAll(s)];
 const escape = s =>
@@ -185,7 +185,8 @@ async function getJSON(url, options) {
   if (!r.ok) throw Error('Não foi possível carregar ' + url.split('?')[0] + ' (' + r.status + ').');
   return r.json();
 }
-async function start(preview = false) {
+let serverMode = false;
+async function start(preview = false, server = false) {
   if (busy) return;
   lock(true);
   try {
@@ -202,14 +203,16 @@ async function start(preview = false) {
       reviews = normalizeReviews(await getJSON('reviews.json', { cache: 'no-store' }).catch(() => []));
       store = null;
     } else {
-      const token = $('#token').value.trim();
-      if (!token) throw Error('Introduz a chave de acesso.');
-      store = new GitHubStore(token);
+      const token = server ? null : $('#token').value.trim();
+      if (!server && !token) throw Error('Introduz a chave de acesso.');
+      serverMode = server;
+      store = new GitHubStore(token, undefined, { server });
       const result = await store.load(defaults);
       catalog = result.catalog;
       base = result.base;
       settings = result.settings;
       reviews = await store.readReviews();
+      if (server) await loadPending();
       $('#token').value = '';
     }
     validateState(catalog, settings);
@@ -219,7 +222,7 @@ async function start(preview = false) {
     $('#workspace').hidden = false;
     renderContent();
     renderGallery();
-    tab(incomingReview ? 'reviews' : 'gallery');
+    tab(incomingReview || pendingReviews.length ? 'reviews' : 'gallery');
     notify(
       preview
         ? 'Modo de pré-visualização: podes experimentar o painel. Nada será publicado.'
@@ -640,7 +643,8 @@ $('#logout').onclick = () => {
     return;
   dirty = false;
   store = null;
-  location.reload();
+  if (serverMode) fetch('/api/auth/logout', { method: 'POST' }).finally(() => location.reload());
+  else location.reload();
 };
 addEventListener('beforeunload', e => {
   if (dirty || pending.size || queue.length) {
@@ -751,16 +755,46 @@ $('#picker-grid').addEventListener('click', e => {
 });
 
 // ---------------------------------------------------------------- reviews
+// Pending reviews come from the site's server (sent by clients through avaliar.html)
+// and, as a fallback, from the approval link in the Formspree email.
+let pendingReviews = [];
+async function loadPending() {
+  try {
+    const r = await fetch('/api/admin/avaliacoes', { cache: 'no-store' });
+    pendingReviews = r.ok ? normalizeReviews(await r.json()) : [];
+  } catch {
+    pendingReviews = [];
+  }
+}
+const pendingList = () => {
+  const list = [...pendingReviews];
+  if (incomingReview && !list.some(r => r.id === incomingReview.id)) list.push(incomingReview);
+  return list;
+};
 const SPORT_NAMES = { karting: 'Karting', hoquei: 'Hóquei em patins', futsal: 'Futsal', outro: 'Outra modalidade' };
 function reviewCard(r, actions) {
   const meta = [r.team, SPORT_NAMES[r.sport], r.date, r.lang === 'es' ? 'ES' : 'PT'].filter(Boolean).map(escape).join(' · ');
   return `<article class="review-item"><p class="review-item-stars" aria-label="${r.rating} de 5 estrelas">${'★'.repeat(r.rating)}<span>${'★'.repeat(5 - r.rating)}</span></p><blockquote>${escape(r.text)}</blockquote><p class="review-item-meta"><strong>${escape(r.name)}</strong> ${meta}</p><div class="review-item-actions">${actions}</div></article>`;
 }
 function renderReviews() {
-  $('#reviews-badge').hidden = !incomingReview;
-  const known = incomingReview && reviews.some(r => r.id === incomingReview.id);
-  $('#review-pending').innerHTML = incomingReview
-    ? `<h3 class="reviews-subtitle">Por aprovar</h3>${known ? '<p class="help">Esta avaliação já está publicada.</p>' : ''}${reviewCard(incomingReview, known ? '<button class="button" data-review-dismiss>Fechar</button>' : '<button class="button primary" data-review-approve>Publicar no site</button> <button class="button" data-review-dismiss>Rejeitar</button> <button class="button" data-review-lang>' + (incomingReview.lang === 'es' ? 'Marcar como português' : 'Marcar como espanhol') + '</button>')}`
+  const waiting = pendingList();
+  $('#reviews-badge').hidden = !waiting.length;
+  $('#reviews-badge').textContent = waiting.length;
+  $('#review-pending').innerHTML = waiting.length
+    ? '<h3 class="reviews-subtitle">Por aprovar</h3>' +
+      waiting
+        .map(r => {
+          const id = escape(r.id);
+          const known = reviews.some(x => x.id === r.id);
+          return (known ? '<p class="help">Esta avaliação já está publicada.</p>' : '') +
+            reviewCard(
+              r,
+              known
+                ? `<button class="button" data-review-dismiss="${id}">Fechar</button>`
+                : `<button class="button primary" data-review-approve="${id}">Publicar no site</button> <button class="button" data-review-dismiss="${id}">Rejeitar</button> <button class="button" data-review-lang="${id}">${r.lang === 'es' ? 'Marcar como português' : 'Marcar como espanhol'}</button>`,
+            );
+        })
+        .join('')
     : '';
   $('#reviews-list').innerHTML = reviews.length
     ? reviews
@@ -787,22 +821,34 @@ async function saveReviews(change, message, success) {
     renderReviews();
   }
 }
+async function dropPending(id) {
+  pendingReviews = pendingReviews.filter(r => r.id !== id);
+  if (incomingReview && incomingReview.id === id) incomingReview = null;
+  if (serverMode) await fetch('/api/admin/avaliacoes?id=' + encodeURIComponent(id), { method: 'DELETE', headers: { 'X-Painel': '1' } }).catch(() => {});
+}
+const findPending = id => pendingList().find(r => r.id === id);
 $('#tab-reviews').addEventListener('click', async e => {
   const b = e.target.closest('button');
   if (!b) return;
-  if (b.hasAttribute('data-review-approve') && incomingReview) {
-    const ok = await saveReviews({ add: incomingReview }, 'Publicar avaliação de ' + incomingReview.name, 'Avaliação publicada. Aparece no site dentro de alguns minutos.');
-    if (ok) incomingReview = null;
+  const { reviewApprove, reviewDismiss, reviewLang, reviewRemove } = b.dataset;
+  if (reviewApprove) {
+    const r = findPending(reviewApprove);
+    if (!r) return;
+    const ok = await saveReviews({ add: r }, 'Publicar avaliação de ' + r.name, 'Avaliação publicada. Aparece no site dentro de alguns minutos.');
+    if (ok) await dropPending(r.id);
     renderReviews();
-  } else if (b.hasAttribute('data-review-lang') && incomingReview) {
-    incomingReview = { ...incomingReview, lang: incomingReview.lang === 'es' ? 'pt' : 'es' };
+  } else if (reviewLang) {
+    const flip = r => (r.id === reviewLang ? { ...r, lang: r.lang === 'es' ? 'pt' : 'es' } : r);
+    pendingReviews = pendingReviews.map(flip);
+    if (incomingReview) incomingReview = flip(incomingReview);
     renderReviews();
-  } else if (b.hasAttribute('data-review-dismiss')) {
-    incomingReview = null;
+  } else if (reviewDismiss) {
+    const known = reviews.some(x => x.id === reviewDismiss);
+    await dropPending(reviewDismiss);
     renderReviews();
-    notify('Avaliação rejeitada. Não foi publicada.');
-  } else if (b.dataset.reviewRemove) {
-    const r = reviews.find(x => x.id === b.dataset.reviewRemove);
+    if (!known) notify('Avaliação rejeitada. Não foi publicada.');
+  } else if (reviewRemove) {
+    const r = reviews.find(x => x.id === reviewRemove);
     if (!r || !confirm('Retirar do site a avaliação de ' + r.name + '?')) return;
     await saveReviews({ removeId: r.id }, 'Retirar avaliação de ' + r.name, 'Avaliação retirada do site.');
   } else if (b.id === 'copy-review-link' || b.id === 'copy-review-link-es') {
@@ -817,7 +863,6 @@ $('#tab-reviews').addEventListener('click', async e => {
     }
   }
 });
-if (incomingReview) notify('Recebeste uma avaliação para aprovar. Entra para a rever e publicar.');
 $('#review-paste').addEventListener('submit', e => {
   e.preventDefault();
   const value = $('#review-paste-url').value.trim();
@@ -828,3 +873,27 @@ $('#review-paste').addEventListener('submit', e => {
   renderReviews();
   notify('Avaliação carregada. Revê o texto e publica.');
 });
+
+// ---------------------------------------------------------------- login
+// On the Cloudflare site the panel signs in with GitHub through the site's server;
+// elsewhere (local preview, old hosting) the access-key form is used.
+(async () => {
+  const err = /#erro=([^&]+)/.exec(location.hash);
+  if (err) {
+    history.replaceState(null, '', location.pathname);
+    notify(decodeURIComponent(err[1]), 'error');
+  }
+  let me = null;
+  try {
+    const r = await fetch('/api/auth/me', { cache: 'no-store' });
+    if (r.status === 200 || r.status === 401) {
+      $('#login-github').hidden = false;
+      $('#login-token-box').open = false;
+      if (r.ok) me = await r.json();
+    } else $('#login-token-box').open = true;
+  } catch {
+    $('#login-token-box').open = true;
+  }
+  if (me && me.login) start(false, true);
+  else if (incomingReview && !err) notify('Recebeste uma avaliação para aprovar. Entra para a rever e publicar.');
+})();

@@ -1,0 +1,26 @@
+# Cloudflare Worker for diogomonteirophotos.pt
+# The site is the repository root (static files) and worker/ answers /api/*.
+# Secrets (GITHUB_TOKEN, GH_CLIENT_ID, GH_CLIENT_SECRET, SESSION_SECRET) live in the Cloudflare dashboard.
+name = "diogo-monteiro-photos"
+main = "worker/index.js"
+compatibility_date = "2026-11-01"
+workers_dev = true
+
+[assets]
+directory = "."
+binding = "ASSETS"
+html_handling = "none"            # keep the .html addresses exactly as they are (SEO)
+not_found_handling = "none"
+run_worker_first = true          # the worker decides: index pages, /api/*
+
+[vars]
+ADMIN_LOGIN = "diogojmr"
+REPO = "diogojmr/diogo-monteiro-photos"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "diogo-site"
+database_id = "7358e9e0-f9fc-49c5-8d2e-4dee22bfa79b"
+
+[observability]
+enabled = true

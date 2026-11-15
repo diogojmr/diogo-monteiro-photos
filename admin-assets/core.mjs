@@ -135,10 +135,13 @@ export function decodeText(value) {
   return new TextDecoder().decode(Uint8Array.from(atob(value.replace(/\s/g, '')), c => c.charCodeAt(0)));
 }
 export class GitHubStore {
-  constructor(token, fetcher = (...args) => globalThis.fetch(...args)) {
+  // server: true = the site's own server (Cloudflare) talks to GitHub with its stored token;
+  // otherwise the browser uses the token typed into the panel
+  constructor(token, fetcher = (...args) => globalThis.fetch(...args), { server = false } = {}) {
     this.token = token;
+    this.server = server;
     this.fetcher = fetcher;
-    this.root = 'https://api.github.com/repos/diogojmr/diogo-monteiro-photos';
+    this.root = server ? '/api/gh' : 'https://api.github.com/repos/diogojmr/diogo-monteiro-photos';
     this.branch = 'main';
     this.loadedHead = null;
   }
@@ -148,8 +151,7 @@ export class GitHubStore {
       cache: 'no-store', // GitHub answers GETs with max-age=60: a cached ref would point at an old commit
       headers: {
         Accept: 'application/vnd.github+json',
-        Authorization: 'Bearer ' + this.token,
-        'X-GitHub-Api-Version': '2022-11-28',
+        ...(this.server ? { 'X-Painel': '1' } : { Authorization: 'Bearer ' + this.token, 'X-GitHub-Api-Version': '2022-11-28' }),
         ...(body ? { 'Content-Type': 'application/json' } : {}),
       },
       ...(body ? { body: JSON.stringify(body) } : {}),
@@ -157,7 +159,7 @@ export class GitHubStore {
     if (!r.ok) {
       const e = Error(
         r.status === 401
-          ? 'Chave inválida ou expirada.'
+          ? this.server ? 'A sessão terminou. Entra novamente.' : 'Chave inválida ou expirada.'
           : r.status === 403
             ? 'Sem permissão de escrita, ou limite de pedidos atingido.'
             : r.status === 409 || r.status === 422

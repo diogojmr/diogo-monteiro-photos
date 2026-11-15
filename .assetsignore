@@ -1,0 +1,11 @@
+# not part of the public site
+.git
+.github
+worker
+wrangler.toml
+.assetsignore
+.dev.vars
+node_modules
+README.md
+CNAME
+.nojekyll

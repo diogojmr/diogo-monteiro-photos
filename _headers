@@ -1,0 +1,29 @@
+# Cloudflare Pages response headers
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  Strict-Transport-Security: max-age=31536000
+
+# pages and data change often: always check for a newer version
+/*.html
+  Cache-Control: no-cache
+/
+  Cache-Control: no-cache
+/*.json
+  Cache-Control: no-cache
+
+# admin panel: never from a stale copy, never in a frame
+/admin.html
+  ! Cache-Control
+  Cache-Control: no-store
+  Content-Security-Policy: frame-ancestors 'none'
+/admin-assets/*
+  Cache-Control: no-cache
+
+# versioned files (?v=hash) and photos: keep for a long time
+/assets/*
+  Cache-Control: public, max-age=2592000
+/media/*
+  Cache-Control: public, max-age=31536000, immutable
