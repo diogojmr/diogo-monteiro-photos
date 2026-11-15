@@ -41,6 +41,12 @@ async function serveStatic(request, env, url) {
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    // one address for search engines: www. and http go to https://diogomonteirophotos.pt
+    if (url.hostname === 'www.diogomonteirophotos.pt' || (url.protocol === 'http:' && url.hostname.endsWith('diogomonteirophotos.pt'))) {
+      url.hostname = 'diogomonteirophotos.pt';
+      url.protocol = 'https:';
+      return Response.redirect(url.toString(), 301);
+    }
     if (!url.pathname.startsWith('/api/')) return serveStatic(request, env, url);
     let mod = ROUTES[url.pathname];
     const params = {};
