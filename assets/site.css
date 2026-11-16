@@ -302,3 +302,21 @@ img{-webkit-user-drag:none;user-select:none;-webkit-touch-callout:none}
 .review-card blockquote p{margin:0;font-size:16px;line-height:1.6;color:var(--ink)}
 .review-card figcaption{display:flex;flex-direction:column;gap:2px;font-size:14px;color:var(--ink-2)}
 .review-card figcaption strong{color:var(--ink);font-weight:600}
+/* design review 16/11: nav action, service headings, reviews, touch targets, form contrast */
+.desktop-nav>a.nav-cta{background:var(--lime);border-color:var(--lime);color:var(--ink);font-weight:600}
+.desktop-nav>a.nav-cta:hover{background:var(--lime-2);border-color:var(--lime-2)}
+.service-text .service-name{margin:0;font:600 clamp(28px,2.4vw,38px)/1 var(--display);text-transform:uppercase;color:inherit}
+.service-text>p{margin:0;color:var(--ink-2);font-size:15px;max-width:30em}
+.review-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:960px){.review-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){
+  .review-grid{display:flex;grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--pad);gap:12px;margin-left:calc(-1*var(--pad,20px));margin-right:calc(-1*var(--pad,20px));padding:0 var(--pad,20px) 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .review-grid::-webkit-scrollbar{display:none}
+  .review-card{flex:0 0 84%;scroll-snap-align:start}
+  .service-grid .service-card:last-child .service-media,.service-media{aspect-ratio:4/3}
+}
+.hero-dot{height:44px}
+.hero-dot span{top:21px}
+.language-switch a,.language-switch [aria-current]{display:inline-flex;align-items:center;justify-content:center;min-width:28px;min-height:32px;padding:0 4px}
+.band-lime .form-field input,.band-lime .form-field textarea{border-bottom-color:rgba(23,25,22,.62)}
+.band-lime .form-field input::placeholder,.band-lime .form-field textarea::placeholder{color:rgba(23,25,22,.66)}
