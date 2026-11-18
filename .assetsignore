@@ -12,3 +12,4 @@ CNAME
 /galerias/album.enc
 /galerias/manifest.json
 /galerias/media/
+/.wrangler/
