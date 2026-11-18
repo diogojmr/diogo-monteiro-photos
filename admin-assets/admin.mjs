@@ -241,6 +241,31 @@ $('#login-form').addEventListener('submit', e => {
   e.preventDefault();
   start(false);
 });
+$('#password-login')?.addEventListener('submit', async event => {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const submit = form.querySelector('button');
+  const error = $('#password-login-error');
+  submit.disabled = true;
+  error.hidden = true;
+  try {
+    const response = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Painel': '1' },
+      body: JSON.stringify({ username: form.elements.username.value.trim(), password: form.elements.password.value }),
+    });
+    const result = await response.json().catch(() => null);
+    if (!response.ok || !result?.ok) throw new Error(result?.error || 'Não foi possível entrar no painel.');
+    form.reset();
+    location.reload();
+  } catch (failure) {
+    form.elements.password.value = '';
+    error.textContent = failure.message || 'Não foi possível entrar no painel.';
+    error.hidden = false;
+    submit.disabled = false;
+    form.elements.password.focus();
+  }
+});
 $('#demo').onclick = () => start(true);
 $$('[data-tab]').forEach(b => b.addEventListener('click', () => tab(b.dataset.tab)));
 ['search', 'filter-category', 'filter-visibility'].forEach(id => $('#' + id).addEventListener('input', renderGallery));
@@ -654,6 +679,7 @@ addEventListener('beforeunload', e => {
 });
 status();
 
+
 let dragged = null;
 $('#gallery').addEventListener('dragstart', e => {
   const card = e.target.closest('[data-card]');
@@ -696,6 +722,7 @@ $('#gallery').addEventListener('dragend', () => {
   dragged = null;
   $$('.card').forEach(c => c.classList.remove('drop-before', 'drop-after', 'dragging'));
 });
+
 
 // ---------- Fotografias dos serviços ----------
 const SERVICE_NAMES = { karting: 'Karting e motorsport', hoquei: 'Hóquei em patins', futsal: 'Futsal e outras modalidades' };
@@ -753,6 +780,7 @@ $('#picker-grid').addEventListener('click', e => {
   renderServices();
   notify('Fotografia do serviço escolhida. Publica para aplicar no site.');
 });
+
 
 // ---------------------------------------------------------------- reviews
 // Pending reviews come from the site's server (sent by clients through avaliar.html)
@@ -874,6 +902,7 @@ $('#review-paste').addEventListener('submit', e => {
   notify('Avaliação carregada. Revê o texto e publica.');
 });
 
+
 // ---------------------------------------------------------------- login
 // On the Cloudflare site the panel signs in with GitHub through the site's server;
 // elsewhere (local preview, old hosting) the access-key form is used.
@@ -887,7 +916,6 @@ $('#review-paste').addEventListener('submit', e => {
   try {
     const r = await fetch('/api/auth/me', { cache: 'no-store' });
     if (r.status === 200 || r.status === 401) {
-      $('#login-github').hidden = false;
       $('#login-token-box').open = false;
       if (r.ok) me = await r.json();
     } else $('#login-token-box').open = true;
