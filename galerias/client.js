@@ -136,6 +136,15 @@ document.getElementById('unlock-form').addEventListener('submit', async (event) 
   error.textContent = 'A abrir a galeria...';
   try {
     if (!crypto.subtle) throw new Error('Abra a galeria através de HTTPS.');
+    const auth = await fetch('/api/galerias/session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: form.elements.password.value }),
+    });
+    if (!auth.ok) {
+      const failure = await auth.json().catch(() => null);
+      throw new Error(failure?.error || 'Galeria temporariamente indisponível.');
+    }
     const response = await fetch('./manifest.json');
     if (!response.ok) throw new Error('Falta o ficheiro da galeria.');
     const manifest = await response.json();
