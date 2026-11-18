@@ -24,3 +24,12 @@ database_id = "7358e9e0-f9fc-49c5-8d2e-4dee22bfa79b"
 
 [observability]
 enabled = true
+
+[[r2_buckets]]
+binding = "GALLERY_BUCKET"
+bucket_name = "djm-galerias-privadas"
+
+[[ratelimits]]
+name = "GALLERY_LIMIT"
+namespace_id = "1367"
+simple = { limit = 5, period = 60 }

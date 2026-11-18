@@ -9,3 +9,6 @@ node_modules
 README.md
 CNAME
 .nojekyll
+/galerias/album.enc
+/galerias/manifest.json
+/galerias/media/
