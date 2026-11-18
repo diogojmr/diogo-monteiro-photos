@@ -33,3 +33,7 @@ bucket_name = "djm-galerias-privadas"
 name = "GALLERY_LIMIT"
 namespace_id = "1367"
 simple = { limit = 5, period = 60 }
+# Preview builds use separate settings and do not receive production credentials.
+[previews.vars]
+ADMIN_LOGIN = "preview"
+REPO = "diogojmr/diogo-monteiro-photos"
