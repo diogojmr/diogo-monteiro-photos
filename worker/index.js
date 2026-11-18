@@ -7,6 +7,7 @@ import * as callback from './auth-callback.js';
 import * as me from './auth-me.js';
 import * as logout from './auth-logout.js';
 import * as gh from './gh.js';
+import { serveGallery } from './gallery.js';
 import { json } from './lib.js';
 
 const ROUTES = {
@@ -46,6 +47,16 @@ export default {
       url.hostname = 'diogomonteirophotos.pt';
       url.protocol = 'https:';
       return Response.redirect(url.toString(), 301);
+    }
+    let path;
+    try { path = decodeURIComponent(url.pathname); } catch { return json({ error: 'Endereço inválido.' }, 400); }
+    if (path === '/api/galerias/session' || /^\/galerias\/(?:manifest\.json|album\.enc|media\/.+)$/i.test(path)) {
+      try {
+        return await serveGallery(request, env, new URL(path, url));
+      } catch (error) {
+        console.error(error);
+        return json({ error: 'Galeria temporariamente indisponível.' }, 500);
+      }
     }
     if (!url.pathname.startsWith('/api/')) return serveStatic(request, env, url);
     let mod = ROUTES[url.pathname];
